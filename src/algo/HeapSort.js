@@ -100,7 +100,7 @@ export default class HeapSort extends Algorithm {
 
 		addDivisorToAlgorithmBar();
 
-		// Exanmples dropdown
+		// Examples dropdown
 		this.exampleDropdown = addDropDownGroupToAlgorithmBar(
 			[
 				['', 'Select Example'],
