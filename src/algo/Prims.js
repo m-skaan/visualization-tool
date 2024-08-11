@@ -277,7 +277,7 @@ export default class Prims extends Graph {
 				this.highlight(9, 0, this.codeID);
 				this.cmd(act.step);
 				this.unhighlight(9, 0, this.codeID);
-				
+
 				this.highlight(10, 0, this.codeID);
 				this.cmd(act.step);
 				this.unhighlight(10, 0, this.codeID);
