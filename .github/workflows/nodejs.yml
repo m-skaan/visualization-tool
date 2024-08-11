@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@master
     - name: Create GH Pages
       run: |
-        git remote set-url origin https://RodrigoDLPontes:${{ secrets.GITHUB_TOKEN }}@github.com/luciankt/visualization-tool.git
+        git remote set-url origin https://luciankt:${{ secrets.VISTOOL_GITHUB_TOKEN }}@github.com/luciankt/visualization-tool.git
         git config --global user.email "lucianktash@gmail.com"
         git config --global user.name "luciankt"
         npm ci
