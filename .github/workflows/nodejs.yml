@@ -1,0 +1,19 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Create GH Pages
+      run: |
+        git remote set-url origin https://luciankt:${{ secrets.VISTOOL_GITHUB_TOKEN }}@github.com/luciankt/visualization-tool.git
+        git config --global user.email "lucianktash@gmail.com"
+        git config --global user.name "luciankt"
+        npm ci
+        npm run deploy
