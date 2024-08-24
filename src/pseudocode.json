@@ -148,7 +148,7 @@
 				["  else:"],
 				["    curr points to head"],
 				["    for (i from front to node before back):"],
-				["    curr moves to next node"],
+				["      curr moves to next node"],
 				["    curr.next points to new node with data"],
 				["  end if"],
 				["  increment size"],
