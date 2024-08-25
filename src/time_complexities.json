@@ -60,15 +60,15 @@
         "Remove at Index": {
             "best": {
                 "big_o": "O(1)",
-                "explanation": "If you remove the last element, you don't have to shift anything."
+                "explanation": "If you remove the last element, you don't have to shift any elements."
             },
             "average": {
                 "big_o": "O(n)",
-                "explanation": "You have to shift elements after the index to the left."
+                "explanation": "You have to shift all elements after the index to the left."
             },
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "You have to shift $n$ elements to the left."
+                "explanation": "If you remove the first element, You have to shift $n$ elements to the left."
             }
         }
     },
