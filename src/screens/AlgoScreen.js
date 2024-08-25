@@ -175,7 +175,6 @@ class AlgoScreen extends React.Component {
 										title="More Information"
 									/>
 								)}
-								
 							</div>
 						</div>
 
@@ -221,12 +220,12 @@ class AlgoScreen extends React.Component {
 	toggleMoreInfo = () => {
 		this.setState(state => ({ bigOEnabled: false }));
 		this.setState(state => ({ moreInfoEnabled: !state.moreInfoEnabled }));
-	} 
+	};
 
 	toggleBigO = () => {
 		this.setState(state => ({ moreInfoEnabled: false }));
 		this.setState(state => ({ bigOEnabled: !state.bigOEnabled }));
-	}
+	};
 
 	togglePseudocode = () => {
 		const pseudocodeMap = { none: 'english', english: 'code', code: 'none' };
