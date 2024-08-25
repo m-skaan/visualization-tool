@@ -42,13 +42,13 @@
             },
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "Resizing the array and shifting every element are each $O(n)$."
+                "explanation": "Resizing the array and shifting $n$ elements are each $O(n)$."
             }
         },
         "Remove from Front": {
             "all cases": {
                 "big_o": "O(n)",
-                "explanation": "You always have to shift every element to the left."
+                "explanation": "You always have to shift $n$ elements to the left."
             }
         },
         "Remove from Back": {
@@ -68,7 +68,7 @@
             },
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "You have to shift every element to the left."
+                "explanation": "You have to shift $n$ elements to the left."
             }
         }
     },
