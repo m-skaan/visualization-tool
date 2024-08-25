@@ -4,7 +4,7 @@ import React from 'react';
 const Modals = {
 	ArrayList: (
 		<ul>
-			<li>ArrayLists must be contigous so you cannot add at an index greater than size.</li>
+			<li>ArrayLists must be contiguous so you cannot add at an index greater than size.</li>
 			<li>Likewise, you cannot remove at an index greater than or equal to size.</li>
 		</ul>
 	),
