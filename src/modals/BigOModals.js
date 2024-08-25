@@ -16,20 +16,19 @@ const renderRows = (data) => {
         const operationData = data[operation];
         return (
             <ul key={operation}>  
-				<h4>{data[operation].name}</h4>
+				<h4>{operation}</h4>
 				<table>
 					<tbody>
 						{
-							Object.keys(operationData).map((complexity) => {
-								if (complexity === 'name') return null;
-								return (
+							Object.keys(operationData).map((complexity) => 
+								(
 									<tr key={complexity}>
 										<td>{complexity[0].toUpperCase() + complexity.slice(1)}</td>
                                         <ToggleBlurCell text={operationData[complexity].big_o} />
 										<td>{applyEquationClass(operationData[complexity].explanation)}</td>
 									</tr>
 								)
-							})
+							)
 						}
 					</tbody>
 				</table>

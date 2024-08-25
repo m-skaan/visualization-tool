@@ -1,7 +1,6 @@
 {
     "ArrayList": {
-        "addToFront": {
-            "name": "Add to Front",
+        "Add to Front": {
             "best": {
                 "big_o": "O(n)",
                 "explanation": "You always have to shift every element to the left."
@@ -15,8 +14,7 @@
                 "explanation": "Resizing the array and shifting every element are each $O(n)$."
             }
         },
-        "addToBack": {
-            "name": "Add to Back",
+        "Add to Back": {
             "best": {
                 "big_o": "O(1)",
                 "explanation": "No shifting is needed because the array is not full."
@@ -30,8 +28,7 @@
                 "explanation": "If the array is full, you have to resize it by making a new array."
             }
         },
-        "removeAtIndex": {
-            "name": "Remove at Index",
+        "Remove at Index": {
             "best": {
                 "big_o": "O(1)",
                 "explanation": "If you remove the last element, you don't have to shift anything."
