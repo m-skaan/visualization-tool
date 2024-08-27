@@ -293,9 +293,13 @@ em {
 	cursor: pointer;
 	font-size: 13px;
 	font-weight: 550;
-	position: absolute;
-	right: 5%;
-	top: 2%;
+}
+
+.modal-content .button-container {
+	display: flex;
+	justify-content: right;
+	margin-top: -1%;
+	margin-bottom: -5%;
 }
 
 .modal-content button:hover {
