@@ -27,7 +27,7 @@ const renderRows = data => {
 					<tbody>
 						{Object.keys(operationData).map(complexity => (
 							<tr key={complexity}>
-								<td>{complexity[0].toUpperCase() + complexity.slice(1)}</td>
+								<td style={{ width: '13%' }}>{complexity[0].toUpperCase() + complexity.slice(1)}</td>
 								<ToggleBlurCell text={operationData[complexity].big_o} />
 								<td>{applyEquationClass(operationData[complexity].explanation)}</td>
 							</tr>
@@ -47,7 +47,7 @@ const ToggleBlurCell = ({ text }) => {
 	};
 
 	return (
-		<td className={isBlurred ? 'blur' : ''} onMouseEnter={handleMouseEnter}>
+		<td style={{ width: '10%' }} className={isBlurred ? 'blur' : ''} onMouseEnter={handleMouseEnter}>
 			{applyEquationClass(text, true)}
 		</td>
 	);

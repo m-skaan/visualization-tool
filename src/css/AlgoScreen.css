@@ -196,7 +196,7 @@ em {
 	right: 20px;
 	top: 10px;
 	width: 20%;
-	max-height: 90%;
+	height: 90%;
 }
 
 .VisualizationMainPage .bigo {
@@ -229,8 +229,9 @@ em {
 }
 
 .VisualizationMainPage .modal-content {
+	max-height: 100%;
+	overflow-y: auto; /* Adds a vertical scrollbar when content exceeds max height */
 	padding: 15px 30px 15px 30px;
-	height: 100%;
 	border-radius: 20px;
 	background-color: var(--control);
 	transition: all 0.4s ease 0s;
