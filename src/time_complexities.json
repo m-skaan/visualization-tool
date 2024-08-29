@@ -94,7 +94,7 @@
     },
 
     "LCS": {
-        "LCS": {
+        "Longest Common Subsequence": {
             "all cases": {
                 "big_o": "O(mn)",
                 "explanation": "Each letter in the first string is compared to each letter of the second string."
