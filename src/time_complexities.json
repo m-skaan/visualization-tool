@@ -91,5 +91,14 @@
                 "example": "[3, 2, 4, 1, 5] with 5 as the pivot"
             }
         }
+    },
+
+    "LCS": {
+        "LCS": {
+            "all cases": {
+                "big_o": "O(mn)",
+                "explanation": "Each letter in the first string is compared to each letter of the second string."
+            }
+        }
     }
 }
