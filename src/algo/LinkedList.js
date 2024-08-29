@@ -372,7 +372,7 @@ export default class LinkedList extends Algorithm {
 			const index = parseInt(this.removeField.value);
 			if (index >= 0 && index < this.size) {
 				this.removeField.value = '';
-				this.implementAction(this.remove.bind(this), (index), false, false, true);
+				this.implementAction(this.remove.bind(this), index, false, false, true);
 			} else {
 				let errorMsg = 'Cannot remove from an empty list.';
 				if (this.size === 1) {
