@@ -52,13 +52,9 @@ export default class AnimatedLabel extends AnimatedObject {
 	}
 
 	async loadFont() {
-		const font = new FontFace(
-			'Source Code Pro',
-			'url(/visualization-tool/SourceCodePro-Regular.ttf)',
-			{
-				display: 'swap',
-			},
-		);
+		const font = new FontFace('Source Code Pro', 'url(/SourceCodePro-Regular.ttf)', {
+			display: 'swap',
+		});
 
 		try {
 			await font.load();
