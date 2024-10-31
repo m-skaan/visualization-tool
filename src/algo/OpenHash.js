@@ -418,8 +418,8 @@ export default class OpenHash extends Hash {
 				'Deleting element: ' + elem + '  Element deleted',
 			);
 			// this.empty[index] = true;
+			this.cmd(act.setText, this.hashTableVisual[index], `DEL ${elem}`);
 			this.deleted[index] = true;
-			this.cmd(act.setText, this.hashTableVisual[index], 'DEL');
 			this.size--;
 		} else {
 			this.cmd(
