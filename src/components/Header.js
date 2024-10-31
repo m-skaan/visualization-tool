@@ -76,7 +76,7 @@ class Header extends React.Component {
 						</li>
 						<li>
 							<a
-								href="https://github.com/RodrigoDLPontes/visualization-tool"
+								href="https://github.com/csvistool/visualization-tool"
 								target="_blank"
 								rel="noreferrer"
 							>
