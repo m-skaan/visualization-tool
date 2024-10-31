@@ -251,7 +251,6 @@ export default class Quickselect extends Algorithm {
 			const RANDOM_ARRAY_SIZE = Math.floor(Math.random() * 9) + 5;
 			const MIN_DATA_VALUE = 1;
 			const MAX_DATA_VALUE = 14;
-			let values = '';
 			for (let i = 0; i < RANDOM_ARRAY_SIZE; i++) {
 				values += (
 					Math.floor(Math.random() * (MAX_DATA_VALUE - MIN_DATA_VALUE)) + MIN_DATA_VALUE
