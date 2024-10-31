@@ -44,7 +44,7 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 						</div> */}
 						<input
 							className="dsa-filter"
-							placeholder="🔎 Search..."
+							placeholder="🔎 Search here..."
 							type="search"
 							onChange={e => setDsaFilter(e.target.value)}
 						/>
