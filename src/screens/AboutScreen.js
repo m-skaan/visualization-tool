@@ -15,7 +15,7 @@ const AboutScreen = () => (
 			<a href="https://rodrigodlpontes.github.io/website/">Rodrigo Pontes</a> under the
 			supervision of Dr. Mary Hudachek-Buswell to include data structures and algorithms
 			covered in the course. It has since been updated and revised by{' '}
-			<a href="https://github.com/RodrigoDLPontes/visualization-tool#contributors-">
+			<a href="https://github.com/csvistool/visualization-tool#contributors-">
 				many other wonderful contributors
 			</a>
 			.
