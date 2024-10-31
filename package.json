@@ -2,7 +2,7 @@
 	"name": "visualization-tool",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://csvistool.github.io/visualization-tool/",
+	"homepage": "https://csvistool.com/",
 	"dependencies": {
 		"@emotion/react": "^11.10.5",
 		"@emotion/styled": "^11.10.5",
