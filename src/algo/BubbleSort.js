@@ -118,7 +118,7 @@ export default class BubbleSort extends Algorithm {
 	}
 
 	setArrayData(data) {
-		const dataList = data.split(",");
+		const dataList = data.split(",").filter(item => item.trim() !== "");
 		dataList.forEach(dataEntry => {
 			this.listField.value += `${dataEntry},`;
 		});
