@@ -9,7 +9,7 @@ import {
 	BsFillSunFill,
 	BsMoonFill,
 } from 'react-icons/bs';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import AlgorithmNotFound404 from '../components/AlgorithmNotFound404';
 import AnimationManager from '../anim/AnimationMain';
@@ -20,6 +20,8 @@ import bigOModals from '../modals/BigOModals';
 import infoModals from '../modals/InfoModals';
 
 const AlgoScreen = ({ theme, toggleTheme }) => {
+	const [searchParams] = useSearchParams();
+	console.log(searchParams.has("data"));
 	const location = useLocation();
 	const algoName = location.pathname.slice(1);
 	const algoDetails = algoMap[algoName];
