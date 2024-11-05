@@ -1,6 +1,5 @@
 import '../css/AlgoScreen.css';
 import '../css/App.css';
-import * as algos from '/Users/andriawang/GT/CS1332/visualization-tool/src/algo';
 
 import {
 	BsBookHalf,
@@ -23,7 +22,6 @@ import infoModals from '../modals/InfoModals';
 
 const AlgoScreen = ({ theme, toggleTheme }) => {
 	const [searchParams] = useSearchParams();
-	console.log(searchParams.has("data"));
 	const location = useLocation();
 	const algoName = location.pathname.slice(1);
 	const algoDetails = algoMap[algoName];

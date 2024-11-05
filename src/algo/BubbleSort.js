@@ -118,13 +118,12 @@ export default class BubbleSort extends Algorithm {
 	}
 
 	setArrayData(data) {
-		// console.log(searchParams.has("data"));
-		this.arrayData = [];
-		const dataList = data.split("+");
+		const dataList = data.split(",").filter(item => item.trim() !== "");
 		dataList.forEach(dataEntry => {
-			this.arrayData.push(dataEntry);
+			this.listField.value += `${dataEntry},`;
 		});
-		console.log(this.arrayData);
+		this.listField.value = this.listField.value.slice(0, -1);
+		this.sortCallback();
 	}
 	
 	setup() {
