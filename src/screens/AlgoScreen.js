@@ -1,5 +1,7 @@
 import '../css/AlgoScreen.css';
 import '../css/App.css';
+import * as algos from '/Users/andriawang/GT/CS1332/visualization-tool/src/algo';
+
 import {
 	BsBookHalf,
 	BsClock,
@@ -42,7 +44,10 @@ const AlgoScreen = ({ theme, toggleTheme }) => {
 
 			animManagRef.current = new AnimationManager(canvasRef, animBarRef);
 
-			new AlgoClass(animManagRef.current, canvasRef.current.width, canvasRef.current.height);
+			const curAlgo = new AlgoClass(animManagRef.current, canvasRef.current.width, canvasRef.current.height);
+			if (searchParams.has("data")) {
+				curAlgo.setArrayData(searchParams.get("data"))
+			}
 
 			const updateDimensions = () => {
 				animManagRef.current.changeSize(document.body.clientWidth);
@@ -54,7 +59,7 @@ const AlgoScreen = ({ theme, toggleTheme }) => {
 				window.removeEventListener('resize', updateDimensions);
 			};
 		}
-	}, [algoName, algoDetails]);
+	}, [algoName, algoDetails, searchParams]);
 
 	useEffect(() => {
 		if (animManagRef.current) {

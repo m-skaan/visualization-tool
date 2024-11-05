@@ -117,6 +117,16 @@ export default class BubbleSort extends Algorithm {
 		this.controls.push(this.lastSwapCheckbox);
 	}
 
+	setArrayData(data) {
+		// console.log(searchParams.has("data"));
+		this.arrayData = [];
+		const dataList = data.split("+");
+		dataList.forEach(dataEntry => {
+			this.arrayData.push(dataEntry);
+		});
+		console.log(this.arrayData);
+	}
+	
 	setup() {
 		this.commands = [];
 
