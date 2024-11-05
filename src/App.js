@@ -1,6 +1,7 @@
 import './css/App.css';
 import React, { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import AboutScreen from './screens/AboutScreen';
 import AlgoScreen from './screens/AlgoScreen';
 import Cookies from 'js-cookie';
 import HomeScreen from './screens/HomeScreen';
@@ -42,7 +43,7 @@ const App = () => {
 				/>
 				<Route
 					path="/about"
-					element={<HomeScreen theme={theme} toggleTheme={toggleTheme} />}
+					element={<AboutScreen theme={theme} toggleTheme={toggleTheme} />}
 				/>
 				<Route
 					path="*"
