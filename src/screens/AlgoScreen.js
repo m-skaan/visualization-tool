@@ -1,6 +1,5 @@
 import '../css/AlgoScreen.css';
 import '../css/App.css';
-import * as algos from '../algo';
 
 import {
 	BsBookHalf,
