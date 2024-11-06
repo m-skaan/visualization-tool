@@ -182,6 +182,16 @@ export default class Heap extends Algorithm {
 		this.cmd(act.setText, this.arrayRects[0], 'null');
 		return this.commands;
 	}
+	
+	setArrayData(data) {
+		const dataList = data.split(",").filter(item => item.trim() !== "");
+		dataList.forEach(dataEntry => {
+			this.buildHeapField.value += `${dataEntry},`;
+		});
+		this.buildHeapField.value = this.buildHeapField.value.slice(0, -1);
+		this.buildHeapCallback.bind(this);
+		this.buildHeapCallback();
+	}
 
 	setup() {
 		this.swapLabel1 = this.nextIndex++;

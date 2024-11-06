@@ -107,6 +107,15 @@ export default class InsertionSort extends Algorithm {
 		this.controls.push(this.clearButton);
 	}
 
+	setArrayData(data) {
+		const dataList = data.split(",").filter(item => item.trim() !== "");
+		dataList.forEach(dataEntry => {
+			this.listField.value += `${dataEntry},`;
+		});
+		this.listField.value = this.listField.value.slice(0, -1);
+		this.sortCallback();
+	}
+
 	setup() {
 		this.commands = [];
 		this.arrayData = [];
