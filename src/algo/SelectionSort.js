@@ -140,12 +140,8 @@ export default class SelectionSort extends Algorithm {
 		this.isMin = false;
 	}
 
-	setArrayData(data) {
-		const dataList = data.split(",").filter(item => item.trim() !== "");
-		dataList.forEach(dataEntry => {
-			this.listField.value += `${dataEntry},`;
-		});
-		this.listField.value = this.listField.value.slice(0, -1);
+	setURLData(data) {
+		this.listField.value = data;
 		this.sortCallback();
 	}
 
