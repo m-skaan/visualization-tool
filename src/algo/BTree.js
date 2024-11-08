@@ -216,6 +216,11 @@ export default class BTree extends Algorithm {
 		this.controls.push(this.buildTreeButton);
 	}
 
+	setArrayData(data) {
+		this.buildTreeField.value = data;
+		this.buildTreeCallback();
+	}
+
 	buildTreeCallback() {
 		const insertedValue = this.buildTreeField.value;
 		this.implementAction(this.clearTree.bind(this));
