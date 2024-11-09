@@ -125,7 +125,8 @@ export default class LSDRadix extends Algorithm {
 		this.controls.push(this.negativeNumbersCheckbox);
 	}
 
-	setURLData(data) {
+	setURLData(searchParams) {
+		const data = searchParams.get("data");
 		this.listField.value = data;
 		this.sortCallback();
 	}

@@ -140,7 +140,8 @@ export default class SelectionSort extends Algorithm {
 		this.isMin = false;
 	}
 
-	setURLData(data) {
+	setURLData(searchParams) {
+		const data = searchParams.get("data");
 		this.listField.value = data;
 		this.sortCallback();
 	}

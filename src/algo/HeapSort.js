@@ -120,7 +120,8 @@ export default class HeapSort extends Algorithm {
 		this.controls.push(this.clearButton);
 	}
 
-	setURLData(data) {
+	setURLData(searchParams) {
+		const data = searchParams.get("data");
 		this.listField.value = data;
 		this.sortCallback();
 	}

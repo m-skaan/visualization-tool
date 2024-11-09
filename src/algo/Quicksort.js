@@ -162,7 +162,8 @@ export default class Quicksort extends Algorithm {
 		}
 	}
 
-	setURLData(data) {
+	setURLData(searchParams) {
+		const data = searchParams.get("data");
 		this.listField.value = data;
 		this.sortCallback();
 	}

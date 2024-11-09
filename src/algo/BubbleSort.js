@@ -117,7 +117,8 @@ export default class BubbleSort extends Algorithm {
 		this.controls.push(this.lastSwapCheckbox);
 	}
 
-	setURLData(data) {
+	setURLData(searchParams) {
+		const data = searchParams.get("data");
 		this.listField.value = data;
 		this.sortCallback();
 	}
