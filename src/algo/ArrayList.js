@@ -206,10 +206,8 @@ export default class ArrayList extends Algorithm {
 	setURLData(searchParams) {
 		this.implementAction(this.clearAll.bind(this));
 		const dataList = searchParams.get("data").split(",").filter(item => item.trim() !== "");
-		dataList.reverse();
 		dataList.forEach(dataEntry => {
-			this.implementAction(this.add.bind(this), dataEntry, 0, false, true, false, true);
-			this.animationManager.skipForward();
+			this.implementAction(this.add.bind(this), dataEntry.substring(0, 4), this.size, false, false, true, true);			this.animationManager.skipForward();
 			this.animationManager.clearHistory();
 		});
 	}
