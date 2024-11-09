@@ -203,6 +203,17 @@ export default class ArrayList extends Algorithm {
 		this.controls.push(this.clearButton);
 	}
 
+	setURLData(searchParams) {
+		this.implementAction(this.clearAll.bind(this));
+		const dataList = searchParams.get("data").split(",").filter(item => item.trim() !== "");
+		dataList.reverse();
+		dataList.forEach(dataEntry => {
+			this.implementAction(this.add.bind(this), dataEntry, 0, false, true, false, true);
+			this.animationManager.skipForward();
+			this.animationManager.clearHistory();
+		});
+	}
+
 	setup() {
 		this.arrayData = new Array(SIZE);
 		this.size = 0;

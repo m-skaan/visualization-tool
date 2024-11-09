@@ -43,7 +43,7 @@ const AlgoScreen = ({ theme, toggleTheme }) => {
 			animManagRef.current = new AnimationManager(canvasRef, animBarRef);
 
 			const curAlgo = new AlgoClass(animManagRef.current, canvasRef.current.width, canvasRef.current.height);
-			if (searchParams) {
+			if (searchParams.toString()) {
 				try {
 					curAlgo.setURLData(searchParams);
 				}
