@@ -208,7 +208,23 @@ export default class ArrayList extends Algorithm {
 		const dataList = searchParams.get("data").split(",").filter(item => item.trim() !== "");
 		dataList.forEach(dataEntry => {
 			this.addValueField.value = dataEntry.substring(0, 4);
-			this.addBackCallback();
+
+			if (
+				this.addValueField.value !== '' &&
+				!(this.length === this.size && this.length * 2 > MAX_SIZE)
+			) {
+				const addVal = this.addValueField.value;
+				this.addValueField.value = '';
+				if (this.size === this.length) {
+					this.implementAction(this.resize.bind(this), addVal, this.size, false, true, false);
+				} else {
+					this.implementAction(this.add.bind(this), addVal, this.size, false, true, false, true);
+				}
+			} else {
+				this.shake(this.addBackButton);
+				this.implementAction(this.setInfoText.bind(this), 'Missing input data.');
+			}
+
 			this.animationManager.skipForward();
 			this.animationManager.clearHistory();
 		});
