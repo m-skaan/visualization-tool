@@ -1,6 +1,7 @@
 import './css/App.css';
 import React, { useEffect, useState } from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import AboutScreen from './screens/AboutScreen';
 import AlgoScreen from './screens/AlgoScreen';
 import Cookies from 'js-cookie';
 import HomeScreen from './screens/HomeScreen';
@@ -35,20 +36,20 @@ const App = () => {
 
 	return (
 		<Router basename={process.env.PUBLIC_URL + '/'}>
-			<Switch>
+			<Routes>
 				<Route
-					exact
-					path={['/', '/about']}
-					render={props => (
-						<HomeScreen {...props} theme={theme} toggleTheme={toggleTheme} />
-					)}
+					path="/"
+					element={<HomeScreen theme={theme} toggleTheme={toggleTheme} />}
 				/>
 				<Route
-					render={props => (
-						<AlgoScreen {...props} theme={theme} toggleTheme={toggleTheme} />
-					)}
+					path="/about"
+					element={<AboutScreen theme={theme} toggleTheme={toggleTheme} />}
 				/>
-			</Switch>
+				<Route
+					path="*"
+					element={<AlgoScreen theme={theme} toggleTheme={toggleTheme} />}
+				/>
+			</Routes>
 		</Router>
 	);
 };

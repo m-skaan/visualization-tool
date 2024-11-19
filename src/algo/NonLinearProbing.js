@@ -135,7 +135,6 @@ export default class NonLinearProbing extends Hash {
 		this.commands = [];
 
 		this.equation = EQUATIONS[parseInt(Math.random() * (EQUATIONS.length - 1))];
-		console.log(this.equation.name);
 
 		for (let i = 0; i < this.table_size; i++) {
 			this.skipDist[i] = i + 1; // Start with "linear" probing

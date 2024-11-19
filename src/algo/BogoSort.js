@@ -59,7 +59,7 @@ export default class BogoSort extends Algorithm {
 		const verticalGroup = addGroupToAlgorithmBar(false);
 
 		addLabelToAlgorithmBar(
-			'Comma seperated list (e.g. "3,1,2"). No more than 5 elements, unless you have time to spare...',
+			'Comma separated list (e.g. "3,1,2"). No more than 5 elements, unless you have time to spare...',
 			verticalGroup,
 		);
 

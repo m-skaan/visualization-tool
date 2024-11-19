@@ -140,6 +140,33 @@ export default class DequeArray extends Algorithm {
 		}
 	}
 
+	setURLData(searchParams) {
+		this.implementAction(this.clearAll.bind(this));
+		const dataList = searchParams.get("data").split(",").filter(item => item.trim() !== "");
+		dataList.forEach(dataEntry => {
+			this.addField.value = dataEntry.substring(0, 4);
+
+			if (this.size < this.arraySize && this.addField.value !== '') {
+				const pushVal = this.addField.value;
+				this.addField.value = '';
+				this.implementAction(this.addLast.bind(this), pushVal, true);
+			} else if (
+				this.size === this.arraySize &&
+				this.addField.value !== '' &&
+				this.size * 2 < MAX_SIZE
+			) {
+				const pushVal = this.addField.value;
+				this.addField.value = '';
+				this.implementAction(this.resize.bind(this), pushVal, true);
+			} else {
+				this.shake(this.addLastButton);
+			}
+	
+			this.animationManager.skipForward();
+			this.animationManager.clearHistory();
+		});
+	}
+
 	setup() {
 		this.nextIndex = 0;
 
