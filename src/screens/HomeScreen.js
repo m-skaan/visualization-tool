@@ -46,7 +46,7 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 			<div className="content">
 				<Switch>
 					<Route exact path="/">
-						{/* <div className="banner-container">
+						<div className="banner-container">
 							<div className="banner">
 								<span role="img" aria-label="nerd">
 									🤓
@@ -60,7 +60,7 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 									Tell us how we can improve!
 								</a>
 							</div>
-						</div> */}
+						</div>
 						<input
 							className="dsa-filter"
 							placeholder="🔎 Search..."
