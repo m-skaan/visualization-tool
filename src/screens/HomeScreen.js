@@ -49,7 +49,7 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 						path="/"
 						element={
 							<>
-								{/* <div className="banner-container">
+								<div className="banner-container">
 									<div className="banner">
 										<span role="img" aria-label="nerd">🤓</span>
 										<span> Studying for the final? </span>
@@ -57,7 +57,7 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 											Tell us how we can improve!
 										</a>
 									</div>
-								</div> */}
+								</div>
 								<input
 									className="dsa-filter"
 									placeholder="🔎 Search..."
