@@ -80,7 +80,7 @@ export default class SelectionSort extends Algorithm {
 		const verticalGroup = addGroupToAlgorithmBar(false);
 
 		addLabelToAlgorithmBar(
-			'Comma seperated list (e.g. "3,1,2"). Max 18 elements & no elements > 999',
+			'Comma separated list (e.g. "3,1,2"). Max 18 elements & no elements > 999',
 			verticalGroup,
 		);
 
@@ -138,6 +138,12 @@ export default class SelectionSort extends Algorithm {
 		this.controls.push(this.maxButton);
 		this.maxButton.checked = true;
 		this.isMin = false;
+	}
+
+	setURLData(searchParams) {
+		const data = searchParams.get("data");
+		this.listField.value = data;
+		this.sortCallback();
 	}
 
 	setup() {

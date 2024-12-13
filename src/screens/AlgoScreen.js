@@ -1,5 +1,6 @@
 import '../css/AlgoScreen.css';
 import '../css/App.css';
+
 import {
 	BsBookHalf,
 	BsClock,
@@ -9,7 +10,7 @@ import {
 	BsFillSunFill,
 	BsMoonFill,
 } from 'react-icons/bs';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import AlgorithmNotFound404 from '../components/AlgorithmNotFound404';
 import AnimationManager from '../anim/AnimationMain';
@@ -20,6 +21,7 @@ import bigOModals from '../modals/BigOModals';
 import infoModals from '../modals/InfoModals';
 
 const AlgoScreen = ({ theme, toggleTheme }) => {
+	const [searchParams] = useSearchParams();
 	const location = useLocation();
 	const algoName = location.pathname.slice(1);
 	const algoDetails = algoMap[algoName];
@@ -40,7 +42,15 @@ const AlgoScreen = ({ theme, toggleTheme }) => {
 
 			animManagRef.current = new AnimationManager(canvasRef, animBarRef);
 
-			new AlgoClass(animManagRef.current, canvasRef.current.width, canvasRef.current.height);
+			const curAlgo = new AlgoClass(animManagRef.current, canvasRef.current.width, canvasRef.current.height);
+			if (searchParams.toString()) {
+				try {
+					curAlgo.setURLData(searchParams);
+				}
+				catch(error) {
+					console.error(error);
+				}
+			}
 
 			const updateDimensions = () => {
 				animManagRef.current.changeSize(document.body.clientWidth);
@@ -52,7 +62,7 @@ const AlgoScreen = ({ theme, toggleTheme }) => {
 				window.removeEventListener('resize', updateDimensions);
 			};
 		}
-	}, [algoName, algoDetails]);
+	}, [algoName, algoDetails, searchParams]);
 
 	useEffect(() => {
 		if (animManagRef.current) {

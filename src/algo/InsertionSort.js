@@ -64,7 +64,7 @@ export default class InsertionSort extends Algorithm {
 		const verticalGroup = addGroupToAlgorithmBar(false);
 
 		addLabelToAlgorithmBar(
-			'Comma seperated list (e.g. "3,1,2"). Max 18 elements & no elements > 999',
+			'Comma separated list (e.g. "3,1,2"). Max 18 elements & no elements > 999',
 			verticalGroup,
 		);
 
@@ -105,6 +105,12 @@ export default class InsertionSort extends Algorithm {
 		this.clearButton = addControlToAlgorithmBar('Button', 'Clear');
 		this.clearButton.onclick = this.clearCallback.bind(this);
 		this.controls.push(this.clearButton);
+	}
+
+	setURLData(searchParams) {
+		const data = searchParams.get("data");
+		this.listField.value = data;
+		this.sortCallback();
 	}
 
 	setup() {
