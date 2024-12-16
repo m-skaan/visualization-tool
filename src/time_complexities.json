@@ -166,7 +166,7 @@
         "Add at Index": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "You have to iterate up to n/2 times to reach the node if the index is not at the head or tail.",
+                "explanation": "May need to iterate $n/2$ times to reach the node if the index is in the middle.",
                 "example": "[1, 2, 3, 4, 5] index = 2"
             },
             "average": {
@@ -197,7 +197,7 @@
         "Remove at Index": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "You have to iterate up to n/2 times to reach the node if the index is not at the head or tail.",
+                "explanation": "May need to iterate $n/2$ times to reach the node if the index is in the middle.",
                 "example": "[1, 2, 3, 4, 5] index = 2"
             },
             "average": {
@@ -217,17 +217,17 @@
         "Push": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "If a resize is triggered $n$ elements must be copied to the new backing array.",
+                "explanation": "If a resize is triggered, $n$ elements must be copied to the new backing array.",
                 "example": "[1, 2, 3] add 4"
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "No elements need to be shifted when adding to back.",
+                "explanation": "No elements need to be shifted when adding to back. Additionally, the average case doesn't involve resizing.",
                 "example": "[1, 2, null] add 3"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "No elements need to be shifted when adding to back.",
+                "explanation": "No elements need to be shifted when adding to back. Additionally, the best case doesn't involve resizing.",
                 "example": "[1, 2, null] add 3"
             }
         },
@@ -239,40 +239,39 @@
             }
         }
     },
-
+	
     "StackLL": {
         "Push": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "We just create and link a new node, no shifting occurs.",
+                "explanation": "Create and link a new node. No shifting occurs.",
                 "example": "1 -> 2 -> 3 add 0 at head"
             }
         },
         "Pop": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "We just remove the head node, no shifting occurs.",
+                "explanation": "Just remove the head node. No shifting occurs.",
                 "example": "1 -> 2 -> 3 remove 1"
             }
         }
     },
-
-    
+	
     "QueueArray": {
         "Push": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "If a resize is triggered $n$ elements must be copied to the new backing array.",
+                "explanation": "If a resize is triggered, $n$ elements must be copied to the new backing array.",
                 "example": "[1, 2, 3] add 4"
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "No elements need to be shifted when adding to back.",
+                "explanation": "No elements need to be shifted when adding to back. Additionally, the average case doesn't involve resizing.",
                 "example": "[1, 2, null] add 3"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "No elements need to be shifted when adding to back.",
+                "explanation": "No elements need to be shifted when adding to back. Additionally, the best case doesn't involve resizing.",
                 "example": "[1, 2, null] add 3"
             }
         },
@@ -284,19 +283,19 @@
             }
         }
     },
-
+	
     "QueueLL": {
         "Push": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "We just create and link a new node using the tail, no traversal or shifting needed.",
+                "explanation": "Create and link a new node using the tail. No traversal or shifting is needed.",
                 "example": "1 -> 2 -> 3 add 4 at end"
             }
         },
         "Pop": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "We just remove the head node, no shifting occurs.",
+                "explanation": "Just remove the head node. No shifting occurs.",
                 "example": "1 -> 2 -> 3 remove 1"
             }
         }
