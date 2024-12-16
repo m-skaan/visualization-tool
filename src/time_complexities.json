@@ -152,14 +152,14 @@
         "Add to Front": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Accessing the head and adjusting pointers always takes constant time.",
+                "explanation": "Accessing the head and adjusting pointers takes constant time.",
                 "example": "[1, 2, 3, 4, 5] add 0"
             }
         },
         "Add to Back": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Accessing the tail and adjusting pointers always takes constant time.",
+                "explanation": "Accessing the tail and adjusting pointers takes constant time.",
                 "example": "[1, 2, 3, 4, 5] add 6"
             }
         },
@@ -171,26 +171,26 @@
             },
             "average": {
                 "big_o": "O(n)",
-                "explanation": "On average, the index to add is in between the head and tail.",
+                "explanation": "On average, the index is between the head and tail, requiring more iterations as the data grows.",
                 "example": "[1, 2, 3, 4, 5] index = 2"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "Adding to the front or back.",
+                "explanation": "Adding at the head and tail is easy with direct access using their pointers.",
                 "example": "[1, 2, 3, 4, 5] index = 5"
             }
         },
         "Remove from Front": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Accessing the head and adjusting pointers always takes constant time.",
+                "explanation": "Accessing the head and adjusting pointers takes constant time.",
                 "example": "[1, 2, 3, 4, 5] remove 1"
             }
         },
         "Remove from Back": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Accessing the tail and adjusting pointers always takes constant time.",
+                "explanation": "Accessing the tail and adjusting pointers takes constant time.",
                 "example": "[1, 2, 3, 4, 5] remove 5"
             }
         },
@@ -202,17 +202,17 @@
             },
             "average": {
                 "big_o": "O(n)",
-                "explanation": "On average, the index to remove is in between the head and tail.",
+                "explanation": "On average, the index is between the head and tail, requiring more iterations as the data grows.",
                 "example": "[1, 2, 3, 4, 5] index = 2"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "Removing the head or tail.",
+                "explanation": "Removing at the head and tail is easy with direct access using their pointers.",
                 "example": "[1, 2, 3, 4, 5] index = 0"
             }
         }
     },
-
+	
     "StackArray": {
         "Push": {
             "worst": {
