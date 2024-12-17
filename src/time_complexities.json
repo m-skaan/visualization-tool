@@ -903,9 +903,9 @@
                 "example": "Remove from [9,6,8,4,5]: becomes [8,6,5,4]"
             },
             "best": {
-                "big_o": "??",
-                "explanation": "??",
-                "example": "??"
+                "big_o": "O(1)",
+                "explanation": "In the best case, we only have to downheap one level after swapping the last element to the root. This case is very rare.",
+                "example": "[1,2,3,10,11,4,5,12,13,14,15,6,7,8,9]"
             }
         },
         "BuildHeap": {
