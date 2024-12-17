@@ -40,7 +40,7 @@ const INFO_MSG_Y = 15;
 const ARRAY_START_X = 100;
 const ARRAY_START_Y = 60;
 
-const MAX_LENGTH = 22;
+const MAX_LENGTH = 26;
 
 const PATTERN_START_Y = 80;
 
