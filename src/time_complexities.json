@@ -74,76 +74,138 @@
     },
 
     "LinkedList": {
-        "Add to Front": {
+        "Add to Front (with tail)": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Create a new node, set its next pointer to the current head, and make the new node the head",
+                "explanation": "Create a new node, set its next pointer to the current head, and make the new node the head.",
                 "example": "1->2->3->null addToFront(0)"
             }
         },
-        "Add to Back with Tail": {
+        "Add to Back (with tail)": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Create a new node, set the tail's next pointer to the new node, and make the new node the tail",
+                "explanation": "Create a new node, set the tail's next pointer to the new node, and make the new node the tail.",
                 "example": "1->2->3->null addToBack(4)"
             }
         },
-        "Add at Index": {
+        "Add at Index (with tail)": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "Traversing to the index is $O(n)$, and initializing and inserting the new node is $O(1)$",
+                "explanation": "Traversing to the second-to-last index is $O(n)$, and initializing and inserting the new node is $O(1)$.",
                 "example": "1->2->3->4->5->null addAtIndex(element: 5, index: 4)"
             },
             "average": {
                 "big_o": "O(n)",
-                "explanation": "Traversing to the index is $O(n)$ (unless head or tail), and initializing and inserting the new node is $O(1)$",
+                "explanation": "Most elements are in the middle. The runtime to traverse to a middle index increases linearly as the data grows.",
                 "example": "1->2->3->4->5->null addAtIndex(element: 6, index: 2)"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "Adding at the tail or head is an $O(1)$ operation",
+                "explanation": "Adding at the tail or head is an $O(1)$ operation.",
                 "example": "1->2->3->4->null addAtIndex(0, 0)"
             }
         },
-        "Remove from Front": {
+        "Remove from Front (with tail)": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Set head equal to head.next",
+                "explanation": "Set the head pointer to be at the second node.",
                 "example": "1->2->3->4 removeFromFront()"
             }
         },
-        "Remove from Back": {
+        "Remove from Back (with tail)": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "You have to traverse to the end of the list to make the second-to-last node the tail",
+                "explanation": "You have to traverse to the end of the list to make the second-to-last node the tail.",
                 "example": "1->2->3->4->null removeFromBack()"
             },
             "average": {
                 "big_o": "O(n)",
-                "explanation": "You have to traverse to the end of the list to make the second-to-last node the tail",
+                "explanation": "You have to traverse to the end of the list to make the second-to-last node the tail.",
                 "example": "1->2->3->4->null removeFromBack()"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "If the head is equal to the tail, set head and tail to null",
+                "explanation": "If the list has one element (which is both head and tail), simply clear the list.",
                 "example": "1->null removeFromBack()"
             }
         },
-        "Remove at Index": {
+        "Remove at Index (with tail)": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "Traversing to the index is $O(n)$, while altering the pointers to remove the node is $O(1)$",
+                "explanation": "Traversing to the index is $O(n)$, while altering the pointers to remove the node is $O(1)$.",
                 "example": "1->2->3->4->5->null removeAtIndex(4)"
             },
             "average": {
                 "big_o": "O(n)",
-                "explanation": "Traversing to the index is $O(n)$, while altering the pointers to remove the node is $O(1)$",
+                "explanation": "Traversing to the index is $O(n)$, while altering the pointers to remove the node is $O(1)$.",
                 "example": "1->2->3->4->null removeAtIndex(2)"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "If index is 0 or head equals tail, time complexity is the same as removeFromFront()",
+                "explanation": "If index is 0 or the list has one element, time complexity is the same as removeFromFront().",
                 "example": "1->2->3->4->null removeAtIndex(0)"
+            }
+        },
+        "Add to Front (without tail)": {
+            "all cases": {
+                "big_o": "$O(1)$",
+                "explanation": "When adding to the front of an SLL, we have direct access to the head node.",
+                "example": "head -> [NEW] -> ['a'] -> ['b'] -> ... -> [$n$]  // addToFront(NEW)"
+            }
+        },
+        "Add to Back (without tail)": {
+            "all cases": {
+                "big_o": "O(n)",
+                "explanation": "Without a tail pointer, adding to the back of an SLL requires traversal through the entire list to reach the end.",
+                "example": "head -> ['a'] -> ['b'] -> ... -> [$n$] -> [NEW]  // addToBack(NEW)"
+            }
+        },
+        "Add at Index (without tail)": {
+            "worst": {
+                "big_o": "O(n)",
+                "explanation": "To add at the last index, we have to traverse $n$ nodes starting at the head.",
+                "example": "head -> ['a'] -> ['b'] -> [NEW] -> ['c'] -> ['d']  // addAtIndex(2, NEW)"
+            },
+            "average": {
+                "big_o": "O(n)",
+                "explanation": "To add at an index near the middle, we have to traverse $n/2$ nodes starting at the head.",
+                "example": "head -> ['a'] -> ['b'] -> [NEW] -> ['c'] -> ['d']  // addAtIndex(2, NEW)"
+            },
+            "best": {
+                "big_o": "O(1)",
+                "explanation": "If adding at the front, the operation is $O(1)$ due to direct access to the head pointer.",
+                "example": "head -> [NEW] -> ['a'] -> ['b'] -> ..~|| OR ||~.. -> [$n - 1$] -> [$n$] -> [NEW] <- tail  // addAtIndex(0 OR size, NEW)"
+            }
+        },
+        "Remove from Front (without tail)": {
+            "all cases": {
+                "big_o": "O(1)",
+                "explanation": "Removing from the front of an SLL is always $O(1)$, as you have direct access to the head pointer.",
+                "example": "head -~[DEL]~-> ['b'] -> ... -> [$n$]  // removeFromFront()"
+            }
+        },
+        "Remove from Back (without tail)": {
+            "all cases": {
+                "big_o": "O(n)",
+                "explanation": "To remove the last node, we have to traverse to the second-to-last node, which is approximately $n$ steps.",
+                "example": "head -> ['a'] -> ['b'] -> ... -> [$n - 1$] -x-> [DEL]  // removeFromBack()"
+            }
+        },
+        "Remove at Index (without tail)": {
+            "worst": {
+                "big_o": "O(n)",
+                "explanation": "To remove the last node, we have to traverse to the second-to-last node, which is approximately $n$ steps.",
+                "example": "head -> ['a'] -> ['b'] -~[DEL]~-> ['d'] -> ['e']  // removeAtIndex(2)"
+            },
+            "average": {
+                "big_o": "O(n)",
+                "explanation": "On average, traversing to an index near the middle takes $n/2$ steps.",
+                "example": "head -> ['a'] -> ['b'] -~[DEL]~-> ['d'] -> ['e']  // removeAtIndex(2)"
+            },
+            "best": {
+                "big_o": "O(1)",
+                "explanation": "If removing from the front, the operation is $O(1)$ as it only requires updating the head pointer.",
+                "example": "head -~[DEL]~-> ['b'] -> ... -> [$n$]  // removeAtIndex(0)"
             }
         }
     },
@@ -208,6 +270,71 @@
             "best": {
                 "big_o": "O(1)",
                 "explanation": "Removing at the head and tail is easy with direct access using their pointers.",
+                "example": "[1, 2, 3, 4, 5] index = 0"
+            }
+        }
+    },
+
+    "CircularSinglyLinkedList": {
+        "Add to Front": {
+            "all cases": {
+                "big_o": "O(1)",
+                "explanation": "Accessing the head and adjusting the head pointer in a circular structure always takes constant time.",
+                "example": "[1, 2, 3, 4, 5] add 0"
+            }
+        },
+        "Add to Back": {
+            "all cases": {
+                "big_o": "O(1)",
+                "explanation": "By inserting a new node in the 2nd position from the front, copying the head's data to this new node, putting the new data in the head node, and then moving the head pointer forward by one, we effectively add to the back in constant time.",
+                "example": "[1, 2, 3, 4, 5] add 6"
+            }
+        },
+        "Add at Index": {
+            "worst": {
+                "big_o": "O(n)",
+                "explanation": "Traversing to the target index requires visiting all $n$ nodes in the worst case.",
+                "example": "[1, 2, 3, 4, 5] index = 2"
+            },
+            "average": {
+                "big_o": "O(n)",
+                "explanation": "On average, traversing to an index near the middle is $n/2$ operations, and increases linearly as the data grows.",
+                "example": "[1, 2, 3, 4, 5] index = 2"
+            },
+            "best": {
+                "big_o": "O(1)",
+                "explanation": "Inserting at the front or back.",
+                "example": "[1, 2, 3, 4, 5] index = 0"
+            }
+        },
+        "Remove from Front": {
+            "all cases": {
+                "big_o": "O(1)",
+                "explanation": "Removing the head and adjusting pointers takes constant time.",
+                "example": "[1, 2, 3, 4, 5] remove 1"
+            }
+        },
+        "Remove from Back": {
+            "all cases": {
+                "big_o": "O(n)",
+                "explanation": "Traversing to find the node before the tail requires visiting about $n$ nodes.",
+                "example": "[1, 2, 3, 4, 5] remove 5"
+            }
+        },
+        "Remove at Index": {
+            "worst": {
+                "big_o": "O(n)",
+                "explanation": "Traversing to the target index requires visiting about $n$ nodes in the worst case.",
+                "example": "[1, 2, 3, 4, 5] index = 2"
+            },
+            "average": {
+                "big_o": "O(n)",
+                "explanation": "On average, traversing to an index near the middle is $n/2$ operations, and increases linearly as the data grows.",
+                "example": "[1, 2, 3, 4, 5] index = 2"
+            },
+            "best": {
+                "big_o": "O(1)",
+                "explanation": "Removing the front or back.",
                 "example": "[1, 2, 3, 4, 5] index = 0"
             }
         }
@@ -315,12 +442,12 @@
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "Have a front pointer, and do not need to resize unless the array is full.",
+                "explanation": "Have a front pointer, and usually we don't need to resize.",
                 "example": "[null, 1, 2, 3] add 0"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "Do not need to shift elements because you have a front pointer.",
+                "explanation": "Circular arrays do not shift elements; the data wraps around and we have a front pointer.",
                 "example": "[null, 1, 2, 3] add 0"
             }
         },
@@ -337,7 +464,7 @@
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "Do not need to resize unless the array is full.",
+                "explanation": "Usually we don't need to resize.",
                 "example": "[1, 2, 3, null] add 4"
             },
             "best": {
@@ -349,7 +476,7 @@
         "Remove from Front": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Never need to resize when removing from an array.",
+                "explanation": "Never need to resize when removing from an array. Simply move the front pointer forward.",
                 "example": "[1, 2, 3, 4] remove 1"
             }
         },
@@ -366,28 +493,28 @@
         "Add to Front": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Have access to the head.",
+                "explanation": "Have direct access to the head.",
                 "example": "1 <--> 2 <--> 3, add 0"
             }
         },
         "Add to Back": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Have access to the tail.",
+                "explanation": "Have direct access to the tail.",
                 "example": "1 <--> 2 <--> 3, add 4"
             }
         },
         "Remove from Front": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Have access to the head.",
+                "explanation": "Have direct access to the head.",
                 "example": "1 <--> 2 <--> 3, remove 1"
             }
         },
         "Remove from Back": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "Have access to the tail, which has a previous pointer.",
+                "explanation": "Have direct access to the tail, which has a previous pointer.",
                 "example": "1 <--> 2 <--> 3, remove 3"
             }
         }
@@ -397,86 +524,86 @@
         "Add": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "In a degenerate tree, you have to traverse $n$ nodes",
+                "explanation": "In a degenerate tree, you have to traverse around $n$ nodes.",
                 "example": "[(0 -> 1 -> 2 -> 3 -> 4 -> 5)] add 6"
             },
             "average": {
                 "big_o": "O(log n)",
-                "explanation": "An average BST is close to balanced, so you have to traverse $log n$ nodes",
+                "explanation": "An average BST is relatively balanced, so you have to traverse around $log n$ nodes.",
                 "example": "[(3<-5->9) (2<-3->null) (7<-9->11) (1<-2->null) (null) (6<-7->null) (10<-11->12)] add 8"
             },
             "best": {
                 "big_o": "O(log n)",
-                "explanation": "In a balanced tree, you have to traverse $log n$ nodes",
+                "explanation": "In a balanced tree, you have to traverse $log n$ nodes.",
                 "example": "[(50<-100->200) (20<-50->80) (150<-200->250) (10<-20->30) (70<-80->90) (120<-150->180) (225<-250->null)] add 500"
             }
         },
         "Remove": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "In a degenerate tree, you have to traverse $n$ nodes to remove a leaf",
+                "explanation": "In a degenerate tree, you have to traverse around $n$ nodes to remove a leaf.",
                 "example": "[(10 <- 23 <- 37 <- 41 <- 50)] remove 10"
             },
             "average": {
                 "big_o": "O(log n)",
-                "explanation": "An average BST is close to balanced, so you have to traverse $log n$ nodes",
+                "explanation": "An average BST is relatively balanced, so you have to traverse around $log n$ nodes.",
                 "example": "[(-70<--20->10) (-100<--70->-50) (0<-10->null) (-200<--100->-80) (-60<--50->null) (-5<-0->5) (null)] remove -70 using predecessor"
             },
             "best": {
                 "big_o": "O(log n)",
-                "explanation": "In a balanced tree, you have to traverse $log n$ nodes",
+                "explanation": "In a balanced tree, you have to traverse $log n$ nodes.",
                 "example": "[(-60<-0->10) (-100<--60->-20) (5<-10->53) (-120<--100->-90) (-40<--20->-1) (2<-5->7) (17<-53->54)] remove -90"
             }
         },
         "Find": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "In a degenerate tree, you have to traverse $n$ nodes",
+                "explanation": "In a degenerate tree, you have to traverse around $n$ nodes.",
                 "example": "[(8 -> 16 -> 24 -> 32 -> 40 -> 48)] find 48"
             },
             "average": {
                 "big_o": "O(log n)",
-                "explanation": "An average BST is close to balanced, so you have to traverse $log n$ nodes",
+                "explanation": "An average BST is relatively balanced, so you have to traverse around $log n$ nodes",
                 "example": "[(7<-17->31) (3<-7->11) (23<-31->41) (2<-3->null) (null<-11->13) (null<-23->29) (37<-41->null)] find 13"
             },
             "best": {
                 "big_o": "O(log n)",
-                "explanation": "In a balanced tree, you have to traverse $log n$ nodes",
+                "explanation": "In a balanced tree, you have to traverse $log n$ nodes.",
                 "example": "[(92<-2384->626433) (14<-92->653) (83279<-626433->9399375) (3<-14->15) (589<-653->793) (50288<-83279->419716) (1058209<-9399375->74944592)] find 3"
             }
         },
         "Pre-Order Traversal": {
             "all cases": {
                 "big_o": "O(n)",
-                "explanation": "Traversals have to touch every node in the tree",
+                "explanation": "Traversals visit all $n$ nodes in the tree.",
                 "example": "[(8<-10->40) (5<-8->null) (30<-40->80) (1<-5->null) (null<-30->null) (70<-80->90)]"
             }
         },
         "In-Order Traversal": {
             "all cases": {
                 "big_o": "O(n)",
-                "explanation": "Traversals have to touch every node in the tree",
+                "explanation": "Traversals visit all $n$ nodes in the tree.",
                 "example": "[(50<-100->200) (null<-50->80) (150<-200->220) (null) (51<-80->null) (120<-150->180) (null<-220->null)]"
             }
         },
         "Post-Order Traversal": {
             "all cases": {
                 "big_o": "O(n)",
-                "explanation": "Traversals have to touch every node in the tree",
+                "explanation": "Traversals visit all $n$ nodes in the tree.",
                 "example": "[(2<-9->18) (1<-2->5) (13<-18->21) (null<-1->null) (3<-5->8) (10<-13->15) (null<-21->null)]"
             }
         },
         "Level-Order Traversal": {
             "all cases": {
                 "big_o": "O(n)",
-                "explanation": "Traversals have to touch every node in the tree",
+                "explanation": "Traversals visit all $n$ nodes in the tree.",
                 "example": "[(80<-90->100) (70<-80->null) (null<-100->110) (60<-70->null) (null) (null) (null<-110->120) (50<-60->null) (null) (null) (null) (null) (null<-120->130)]"
             }
         },
         "Calculate Height": {
             "all cases": {
                 "big_o": "O(n)",
-                "explanation": "Finding the height requires traversing the whole tree to find the deepest node",
+                "explanation": "Finding the height requires traversing the whole tree to find the deepest node.",
                 "example": "[(30<-40->60) (0<-30->25) (null<-60->80) (null<-0->null) (33<-35->null) (null) (null<-80->null)]"
             }
         }
@@ -486,113 +613,130 @@
         "Add": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "Resize and call addFront() on $n$ elements",
-	            "example": "[0, 1, 2, 3, null, null, null] add 5"
+                "explanation": "If everything hashes to the same index, we have to traverse the entire chain structure to check for duplicates, which is $O(n)$ for an SLL. The resize case is also $O(n)$ for an SLL.",
+	            "example": "[0,15,30,45,null,null,null] add 60"
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to the index and few or no collision",
+                "explanation": "$O(1)$ access to the hashed index and relatively few collisions.",
                 "example": "[0, 1, 2, null, null, null, null] add 4"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to index and no collision",
+                "explanation": "$O(1)$ access to hashed index and there are no collisions.",
                 "example": "[0, 1, null, 3, null, null, null] add 2"
             }
         },
         "Remove": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "Traversing to the end of a linked list is $O(n)$",
+                "explanation": "If everything hashes to the same index, we have to traverse the entire chain structure to find the entry, which is $O(n)$ for an SLL.",
                 "example": "[[0, 7, 14, 21], null, null, null, null, null, null] remove 21"
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to index and few or no collisions",
+                "explanation": "$O(1)$ access to hashed index and relatively few collisions.",
                 "example": "[0, 1, 2, null, null, null, null] remove 1"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to index and no collisions",
+                "explanation": "$O(1)$ access to hashed index and there are no collisions.",
                 "example": "[0, 1, 2, null, null] remove 1"
             }
         },
         "Find": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "Traversing to the end of a linked list is $O(n)$",
+                "explanation": "If everything hashes to the same index, we have to traverse the entire chain structure. This is $O(n)$ for an SLL.",
                 "example": "[null, [1, 8, 15], null, null, null, null, null] find 15"
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to index and few or no collisions",
+                "explanation": "$O(1)$ access to hashed index and relatively few collisions.",
                 "example": "[0, 1, 2, null, null] find 0"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to index and no collisions",
+                "explanation": "$O(1)$ access to hashed index and there are no collisions.",
                 "example": "[0, 1, 2, null, null] find 1"
             }
         },
         "Resize": {
             "all cases": {
                 "big_o": "O(n)",
-                "explanation": "Resize by using addFront() on $n$ elements, which is $O(1)$ each",
+                "explanation": "Resize by rehashing and adding $n$ elements to the new table, which is $O(1)$ each with an SLL chain. We do not have to check for duplicates when resizing.",
                 "example": "[0, 1, 2, 3, null, null, null] add 5"
             }
         }
     },
-    
+
     "OpenHash": {
         "Add": {
             "worst": {
                 "big_o": "O(n²)",
-                "explanation": "Resize by adding $n$ entries and $n$ probes are needed each",
-                "example": "[null, 0, 1, 2, 3, null, null] add 4, h1 always returns 1, q = 2"
+                "explanation": "To resize, you have to rehash and copy all $n$ entries. For each entry, you may have to probe $n$ times if they all hash to the same index.",
+                "example": "A HashMap with hashcode function always returning 1."
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to index and few or no collisions",
-                "example": "[0, 1, 2, null, null, null, null] add 3, q = 11"
+                "explanation": "With a good hash function, there are few or no collisions, so on average you just add the entry to the array at its hashed index.",
+                "example": "Adding an entry with key that has calculated index 7, and index 7 in the array is empty."
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to index and no collisions",
-                "example": "[0, 1, null, 10, null, null, 6] find 10, q = 11"
+                "explanation": "If there are no collisions, you can add the entry directly to its hashed index.",
+                "example": "Adding an entry with key that has calculated index 7, and index 7 in the array is empty."
             }
         },
         "Remove": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "Collisions cause $n$ probings",
-                "example": "[0, 14, 21, 28, null, null, null] remove 28, q = 11"
+                "explanation": "If every entry had the same hashcode, then when you want to remove an entry, you'd have to probe over every other entry.",
+                "example": "A HashMap with haschode function always returning 1."
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to index and few or no collisions",
-                "example": "[0, 1, 2, null, null, null, null] remove 1, q = 11"
+                "explanation": "With a good hash function, there are few or no collisions, so on average you just remove the entry at its calculated index without probing.",
+                "example": "Removing an entry with key that has calculated index 7, and index 7 contains the key you're looking for."
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to index and no collisions",
-                "example": "[0, 1, null, 10, null, null, 6] find 10, q = 11"
+                "explanation": "If there are no collisions, remove the entry from its calculated index in the array.",
+                "example": "Removing an entry with key that has calculated index 7, and index 7 contains the key you're looking for."
             }
         },
         "Find": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "Collisions cause $n$ probings",
-                "example": "[0, 14, 21, 28, null, null, null] find 28, q = 11"
+                "explanation": "If every entry had the same hashcode, then when you want to find an entry, you'd have to probe over every other entry.",
+                "example": "A HashMap with haschode function always returning 1."
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to index and few or no collisions",
-                "example": "[0, 1, 2, null, null, null, null] find 1, q = 11"
+                "explanation": "With a good hash function, there are few or no collisions, so on average you can just find the entry at its calculated index without probing.",
+                "example": "Finding an entry with key that has calculated index 7, and index 7 contains the key you're looking for."
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "$O(1)$ access to index and no collisions",
-                "example": "[0, 1, null, 10, null, null, 6] find 10, q = 11"
+                "explanation": "If there are no collisions, find the entry from its calculated index in the array.",
+                "example": "Finding an entry with key that has calculated index 7, and index 7 contains the key you're looking for."
+            }
+        },
+        "Resize": {
+            "worst": {
+                "big_o": "O(n²)",
+                "explanation": "When resizing a Probing HashMap, each entry has the chance to probe over once more, causing a potential $n$ probes for each of $n$ entries.",
+                "example": "A Probing HashMap at full capacity, with a hash function that only returns 1."
+            },
+            "average": {
+                "big_o": "O(n)",
+                "explanation": "There are generally few collisions after a resize. Copy all $n$ entries into their new spot in the resized array.",
+                "example": "Each entry is copied over with there only being maybe 1 to 2 collisions."
+            },
+            "best": {
+                "big_o": "O(n)",
+                "explanation": "In the best case, there are no collisions when resizing.",
+                "example": "Each entry is copied over to the new array without any collisions."
             }
         }
     },
@@ -600,60 +744,226 @@
     "BTree": {
         "Add": {
             "worst": {
-                "big_o": "O(logn)",
-                "explanation": "Each level requires a promotion, therefore $O(logn)$ promotions in addition to $O(logn)$ add.",
+                "big_o": "O(log n)",
+                "explanation": "Each level requires a promotion, therefore $O(log n)$ promotions in addition to $O(log n)$ add.",
                 "example": "20,26,33|12,16|21|27,29,32|36,37 add 31 promote second"
             },
             "average": {
-                "big_o": "O(logn)",
-                "explanation": "Some promotions may be required after adding the element, but doing a promotion is $O(1)$ in addition to the $O(logn)$ addition.",
+                "big_o": "O(log n)",
+                "explanation": "Some promotions may be required after adding the element, but doing a promotion is $O(1)$ in addition to the $O(log n)$ addition.",
                 "example": "20,33|12,16|21,26,29|36,37 add 32 promote second"
             },
             "best": {
-                "big_o": "O(logn)",
+                "big_o": "O(log n)",
                 "explanation": "No promotions required, just adding the element to a node.",
                 "example": "20,33|12,16|26,29|36,37 add 21 promote second"
             }
         },
         "Remove": {
             "worst": {
-                "big_o": "O(logn)",
-                "explanation": "A transfer and/or fusion is required at each level, which is $O(logn)$ extra work on top of the $O(logn)$ remove.",
+                "big_o": "O(log n)",
+                "explanation": "A transfer and/or fusion is required at each level, which is $O(log n)$ extra work on top of the $O(log n)$ remove.",
                 "example": "26|20|36|12|21|27,29|37 remove 26 with predecessor"
             },
             "average": {
-                "big_o": "O(logn)",
-                "explanation": "Some transfers and/or fusions may be required, but either is $O(1)$ in addition to the $O(logn)$ remove.",
+                "big_o": "O(log n)",
+                "explanation": "Some transfers and/or fusions may be required, but either is $O(1)$ in addition to the $O(log n)$ remove.",
                 "example": "26|20|29,36|12|21|27|32|37 remove 32 with predecessor"
             },
             "best": {
-                "big_o": "O(logn)",
+                "big_o": "O(log n)",
                 "explanation": "No transfer or fusions required, just removing the element from a node.",
                 "example": "26|20|29,33|12,16|21|27|31,32|36,37 remove 31 with predecessor"
             }
         },
         "Find": {
             "worst": {
-                "big_o": "O(logn)",
-                "explanation": "Element doesn't exist in tree, so we only traverse to $logn$ nodes before not finding element.",
+                "big_o": "O(log n)",
+                "explanation": "Element doesn't exist in tree, so we only traverse to $log n$ nodes before not finding element.",
                 "example": "26|20|29,33|12,16|21|27|31,32|36,37 find 28"
             },
             "average": {
-                "big_o": "O(logn)",
+                "big_o": "O(log n)",
                 "explanation": "Most elements will exist at the bottom of the tree.",
                 "example": "26|20|29,33|12,16|21|27|31,32|36,37 find 21"
             },
             "best": {
-                "big_o": "O(logn)",
+                "big_o": "O(log n)",
                 "explanation": "Element exists near top of tree.",
                 "example": "26|20|29,33|12,16|21|27|31,32|36,37 find 29"
             }
         },
         "Calculate Height": {
             "all cases": {
-                "big_o": "O(logn)",
-                "explanation": "All leaf nodes will exist at depth of $logn$.",
+                "big_o": "O(log n)",
+                "explanation": "All leaf nodes will exist at depth of $log n$.",
                 "example": "26|20|29,33|12,16|21|27|31,32|36,37 height=2"
+            }
+        }
+    },
+
+    "2-4 Tree": {
+        "Add": {
+            "worst": {
+                "big_o": "O(log n)",
+                "explanation": "Each level requires a promotion, therefore $O(log n)$ promotions in addition to $O(log n)$ add.",
+                "example": "20,26,33|12,16|21|27,29,32|36,37 add 31 promote second"
+            },
+            "average": {
+                "big_o": "O(log n)",
+                "explanation": "Some promotions may be required after adding the element, but doing a promotion is $O(1)$ in addition to the $O(log n)$ addition.",
+                "example": "20,33|12,16|21,26,29|36,37 add 32 promote second"
+            },
+            "best": {
+                "big_o": "O(log n)",
+                "explanation": "No promotions required, just adding the element to a leaf node, which requires traversing $log n$ levels.",
+                "example": "20,33|12,16|26,29|36,37 add 21 promote second"
+            }
+        },
+        "Remove": {
+            "worst": {
+                "big_o": "O(log n)",
+                "explanation": "A fusion is required at each level and propagates up, which is $O(log n)$ work plus the $O(log n)$ remove.",
+                "example": "26|20|36|12|21|27,29|37 remove 26 with predecessor"
+            },
+            "average": {
+                "big_o": "O(log n)",
+                "explanation": "Some transfers and/or fusions may be required, but either is $O(1)$ in addition to the $O(log n)$ remove.",
+                "example": "26|20|29,36|12|21|27|32|37 remove 32 with predecessor"
+            },
+            "best": {
+                "big_o": "O(log n)",
+                "explanation": "No transfer or fusions required. Must always traverse $log n$ levels to the leaf nodes, either to remove a leaf data or find a predecessor or successor.",
+                "example": "26|20|29,33|12,16|21|27|31,32|36,37 remove 31 with predecessor"
+            }
+        },
+        "Find": {
+            "worst": {
+                "big_o": "O(log n)",
+                "explanation": "Element doesn't exist in tree, so we only traverse to $log n$ nodes before not finding element.",
+                "example": "26|20|29,33|12,16|21|27|31,32|36,37 find 28"
+            },
+            "average": {
+                "big_o": "O(log n)",
+                "explanation": "Most elements will exist at the bottom of the tree.",
+                "example": "26|20|29,33|12,16|21|27|31,32|36,37 find 21"
+            },
+            "best": {
+                "big_o": "O(1)",
+                "explanation": "Element exists at the root of tree.",
+                "example": "26|20|29,33|12,16|21|27|31,32|36,37 find 26"
+            }
+        },
+        "Calculate Height": {
+            "all cases": {
+                "big_o": "O(log n)",
+                "explanation": "Because the tree is complete, all leaves are on the same (deepest) level. Traverse to any leaf node to find the height. A range of possible heights can be inferred using the number of data, but an exact answer requires traversal.",
+                "example": "26|20|29,33|12,16|21|27|31,32|36,37 height=2"
+            }
+        }
+    },
+
+    "Heap": {
+        "Add": {
+            "worst": {
+                "big_o": "O(log n)",
+                "explanation": "When adding a new element, in the worst cae, it bubbles up to the root through $logn$ levels.",
+                "example": "Add 10 to [5,4,3]: becomes [10,5,3,4]"
+            },
+            "average": {
+                "big_o": "O(log n)",
+                "explanation": "New elements typically bubble up through some of the heap's levels, logarithmically proportional to the size.",
+                "example": "Add 6 to [8,4,3]: becomes [8,6,3,4]"
+            },
+            "best": {
+                "big_o": "???",
+                "explanation": "???",
+                "example": "???"
+            }
+        },
+        "Remove": {
+            "worst": {
+                "big_o": "O(log n)",
+                "explanation": "After removing the root, the last element is put at the room and in the worst case must bubble down $logn$ levels.",
+                "example": "Remove 9 from [9,7,8,4,3] -> [8,7,3,4]"
+            },
+            "average": {
+                "big_o": "O(log n)",
+                "explanation": "The new root typically needs to bubble down through some of the heap's levels, logarithmically proportional to the size.",
+                "example": "Remove from [9,6,8,4,5]: becomes [8,6,5,4]"
+            },
+            "best": {
+                "big_o": "O(1)",
+                "explanation": "Even in the best case, we must check both children while bubbling down.",
+                "example": "Remove from [100, 7, 99, 6, 5, 98, 97, 4, 3, 2, 1, 96]: becomes [7, 96, 99, 6, 5, 98, 97, 4, 3, 2, 1]"
+            }
+        },
+        "BuildHeap": {
+            "all cases": {
+                "big_o": "O(n)",
+                "explanation": "Most nodes are near bottom and require minimal adjustments. More specifically, about half of all data are on the leaf layer, and a quarter are on the second-to-last level, etc.",
+                "example": "Build from [3,1,4,5,2]: becomes [5,3,4,1,2]"
+            }
+        }
+    },
+    
+    "AVL": {
+        "Add": {
+            "worst": {
+                "big_o": "O(log n)",
+                "explanation": "Search for the insertion point at a leaf position, then perform at most one or two rotations. Since the tree is self-balancing, we never traverse more than $log n$ nodes.",
+                "example": "Current tree: [40, 30, 50, 20, null, null, null], Add 25"
+            },
+            "average": {
+                "big_o": "O(log n)",
+                "explanation": "Search for the insertion point at a leaf position, then perform at most one or two rotations. Since the tree is self-balancing, we never traverse more than $log n$ nodes.",
+                "example": "Current tree: [30, 20, null], Add 10"
+            },
+            "best": {
+                "big_o": "O(log n)",
+                "explanation": "Even in an ideal case, we still must traverse down $log n$ nodes to find the correct insertion point and update balance factors back up to root.",
+                "example": "Current tree: [20, 10, 30, 5, 15, 25, null], Add 35"
+            }
+        },
+        "Remove": {
+            "worst": {
+                "big_o": "O(log n)",
+                "explanation": "Search for the node, remove it, then rebalance up to root. May need to find predecessor/successor at a leaf node. Each rotation is $O(1)$.",
+                "example": "Current tree: [6, 3, 9, null, 4, 7, 16, null, null, null, null, 11, null], Remove 6"
+            },
+            "average": {
+                "big_o": "O(log n)",
+                "explanation": "Search for the node, remove it, then rebalance up to root. AVL property ensures we never have more than $log n$ nodes to traverse or fix.",
+                "example": "Current tree: [40, 30, 50, 20, null, null, null], Remove 50"
+            },
+            "best": {
+                "big_o": "O(log n)",
+                "explanation": "Even when removing a leaf node, we must still traverse down to it ($log n$) and update balance factors on the path back to root. When removing an internal/root node, we must find a predecessor/successor at a leaf node.",
+                "example": "Current tree: [50, 30, 70, 20, 40, 60, 80], Remove 20"
+            }
+        },
+        "Find": {
+            "worst": {
+                "big_o": "O(log n)",
+                "explanation": "Must traverse from root to leaf in a balanced tree. AVL property guarantees the height is $log n$, so we never check more than $log n$ nodes.",
+                "example": "Current tree: [50, 30, 70, 20, 40, 60, 80], Find 40"
+            },
+            "average": {
+                "big_o": "O(log n)",
+                "explanation": "This is a binary search through a balanced tree. Each comparison eliminates half of remaining nodes, leading to $log n$ checks. Intuitively, most data is located towards the bottom of the tree, so we still have to traverse close to $log n$ levels.",
+                "example": "Current tree: [50, 30, 70, 20, 40, 60, 80], Find 60"
+            },
+            "best": {
+                "big_o": "O(1)",
+                "explanation": "Target value is at root node, requiring just one comparison and no traversal",
+                "example": "Current tree: [50, 30, 70, 20, 40, 60, 80], Find 50"
+            }
+        },
+        "Calculate Height": {
+            "all cases": {
+                "big_o": "O(1)",
+                "explanation": "Height is stored and maintained in each node as a property, requiring just a single field access",
+                "example": "node.height or node.getHeight()"
             }
         }
     },
@@ -662,52 +972,52 @@
         "Add": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "With a bad coin flip probability, the SkipList can look like a LinkedList stacked multiple times, so you have to traverse it like a LinkedList.",
+                "explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n) layers to go straight down, which simplifies to $O(n)$,",
                 "example": "3,7,15,22|3,7,15,22|3,7,15,22|3,7,15,22 add 11 with 4 heads."
             },
             "average": {
-                "big_o": "O(logn)",
-                "explanation": "With random coin probability, SkipList may not be perfectly symmetric, but on average traversing takes $O(logn)$.",
-                "example": "null,7,null,null|null,7,null,22|null,7,15,null|3,7,15,22 add 10 with random coin flip"
+                "big_o": "O(log n)",
+                "explanation": "With random coin probability, SkipList may not be perfectly symmetric, but on average traversing is $O(log n)$.",
+                "example": "null,7,null,null|null,7,null,22|null,7,15,22|3,7,15,22 add 10 with random coin flip"
             },
             "best": {
-                "big_o": "O(logn)",
-                "explanation": "With random coin probability, SkipList is perfectly symmetric, so traversing is $O(logn)$.",
+                "big_o": "O(log n)",
+                "explanation": "With perfectly distributed coin flips, SkipList is symmetric, so traversing is $O(log n)$.",
                 "example": "null,null,10,null,null|3,null,10,null,22|3,7,10,15,22 add 19 with random coin flip"
             }
         },
         "Remove": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "With a bad coin flip probability, the SkipList can look like a LinkedList stacked multiple times, so you have to traverse it like a LinkedList.",
+                "explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n) layers to go straight down, which simplifies to $O(n)$,",
                 "example": "3,7,15,22|3,7,15,22|3,7,15,22|3,7,15,22 remove 15"
             },
             "average": {
-                "big_o": "O(logn)",
-                "explanation": "With random coin probability, SkipList may not be perfectly symmetric, but on average traversing takes $O(logn)$.",
-                "example": "null,7,null,null|null,7,null,22|null,7,15,null|3,7,15,22 remove 15"
+                "big_o": "O(log n)",
+                "explanation": "With random coin probability, SkipList may not be perfectly symmetric, but on average traversing is $O(log n)$.",
+                "example": "null,7,null,null|null,7,null,22|null,7,15,22|3,7,15,22 remove 15"
             },
             "best": {
-                "big_o": "O(logn)",
-                "explanation": "With random coin probability, SkipList is perfectly symmetric, so traversing is $O(logn)$.",
+                "big_o": "O(log n)",
+                "explanation": "With perfectly distributed coin flips, SkipList is symmetric, so traversing is $O(log n)$. You still need to traverse down $log n$ levels to remove.",
                 "example": "null,null,10,null,null|3,null,10,null,22|3,7,10,15,22 remove 15"
             }
         },
         "Find": {
             "worst": {
                 "big_o": "O(n)",
-                "explanation": "With a bad coin flip probability, the SkipList can look like a LinkedList stacked multiple times, so you have to traverse it like a LinkedList.",
+                "explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n) layers to go straight down, which simplifies to $O(n)$,",
                 "example": "3,7,15,22|3,7,15,22|3,7,15,22|3,7,15,22 find 22"
             },
             "average": {
-                "big_o": "O(logn)",
-                "explanation": "With random coin probability, SkipList may not be perfectly symmetric, but on average traversing takes $O(logn)$.",
-                "example": "null,7,null,null|null,7,null,22|null,7,15,null|3,7,15,22 find 22"
+                "big_o": "O(log n)",
+                "explanation": "With random coin probability, SkipList may not be perfectly symmetric, but on average traversing takes $O(log n)$.",
+                "example": "null,7,null,null|null,7,null,22|null,7,15,22|3,7,15,22 find 22"
             },
             "best": {
-                "big_o": "O(logn)",
-                "explanation": "With random coin probability, SkipList is perfectly symmetric, so traversing is $O(logn)$.",
-                "example": "null,null,10,null,null|3,null,10,null,22|3,7,10,15,22 find 22"
+                "big_o": "O(1)",
+                "explanation": "The data is found immediately.",
+                "example": "3,null,10,null,null|3,null,10,null,22|3,7,10,15,22 find 3"
             }
         }
     },
@@ -716,34 +1026,34 @@
         "BubbleSort without Last Swap Optimization": {
             "worst": {
                 "big_o": "O(n²)",
-                "explanation": "must swap n data n times each",
+                "explanation": "We compare every element to every other element, which is approximately $n$ times $n$ work.",
                 "example": "[5, 4, 3, 2, 1]"
             },
             "average": {
                 "big_o": "O(n²)",
-                "explanation": "on average, half data is unsorted thus n/2 swaps for n items",
+                "explanation": "On average, it performs more closely to its worst case.",
                 "example": "[1, 4, 3, 5, 2]"
             },
             "best": {
                 "big_o": "O(n)",
-                "explanation": "already sorted list with 1 check for n items",
+                "explanation": "If we have a separate boolean flag to check if the list is already sorted, we can detect this in one pass. Otherwise, this is $O(n²)$.",
                 "example": "[1, 2, 3, 4, 5]"
             }
         },
         "BubbleSort with Last Swap Optimization": {
             "worst": {
                 "big_o": "O(n²)",
-                "explanation": "Optimization has not effect on worst case runtime",
+                "explanation": "Optimization has no effect on the worst-case.",
                 "example": "[5, 4, 3, 2, 1]"
             },
             "average": {
                 "big_o": "O(n²)",
-                "explanation": "While optimization does increase average runtime efficiency, it is not enough to affect Big O.",
+                "explanation": "While optimization does increase average runtime efficiency, it does not affect the time complexity.",
                 "example": "[1, 4, 3, 5, 2]"
             },
             "best": {
                 "big_o": "O(n)",
-                "explanation": "Already sorted list thus 1 check for n items",
+                "explanation": "The list is already sorted, which we can detect in one pass since the algorithm is adaptive.",
                 "example": "[1, 2, 3, 4, 5]"
             }
         }
@@ -753,34 +1063,34 @@
         "CocktailSort without Last Swap Optimization": {
             "worst": {
                 "big_o": "O(n²)",
-                "explanation": "Must check n times for n items",
+                "explanation": "We may have to do up to $n$ swaps for each of $n$ items.",
                 "example": "[5, 4, 3, 2, 1]"
             },
             "average": {
                 "big_o": "O(n²)",
-                "explanation": "Must check on average n/2 times for n items",
+                "explanation": "On average, it performs more closely to its worst case.",
                 "example": "[1, 4, 3, 5, 2]"
             },
             "best": {
                 "big_o": "O(n)",
-                "explanation": "must check 1 time for n items",
+                "explanation": "If we have a separate boolean flag to check if the list is already sorted, we can detect this in one pass. Otherwise, this is $O(n²)$.",
                 "example": "[1, 2, 3, 4, 5]"
             }
         },
         "CocktailSort with Last Swap Optimization": {
             "worst": {
                 "big_o": "O(n²)",
-                "explanation": "Optimization has no effect on the worst-case runtime",
+                "explanation": "Optimization has no effect on the worst case.",
                 "example": "[5, 4, 3, 2, 1]"
             },
             "average": {
                 "big_o": "O(n²)",
-                "explanation": "While optimization increases average runtime it is not enough to effect Big O",
+                "explanation": "While optimization does increase average runtime efficiency, it does not affect the time complexity.",
                 "example": "[1, 4, 3, 5, 2]"
             },
             "best": {
                 "big_o": "O(n)",
-                "explanation": "1 check for n items in already sorted list",
+                "explanation": "The list is already sorted, which we can detect in one pass since the algorithm is adaptive.",
                 "example": "[1, 2, 3, 4, 5]"
             }
         }
@@ -790,17 +1100,17 @@
         "InsertionSort": {
             "worst": {
                 "big_o": "O(n²)",
-                "explanation": "n checks for each item where there are n items",
+                "explanation": "If the initial array is reverse-sorted, we have to move each element to the beginning of the array one spot at a time, which is approximately $n$ times $n$ work.",
                 "example": "[6, 5, 4, 3, 2, 1]"
             },
             "average": {
                 "big_o": "O(n²)",
-                "explanation": "n/2 checks for each item where there are n items",
+                "explanation": "On average, it performs more closely to its worst case.",
                 "example": "[6, 1, 4, 2, 5, 3]"
             },
             "best": {
                 "big_o": "O(n)",
-                "explanation": "one check for each item where there are n items",
+                "explanation": "If the initial array is already sorted, we check each element once and do not have to move any towards the front.",
                 "example": "[1, 2, 3, 4, 5, 6]"
             }
         }
@@ -810,7 +1120,7 @@
         "SelectionSort": {
             "all cases": {
                 "big_o": "O(n²)",
-                "explanation": "select largest element which is linear time n times",
+                "explanation": "Finding the largest or smallest element in the unsorted portion of the array requires $n$ comparisons, and we do this $n$ times.",
                 "example": "[7, 1, 8, 3, 5]"
             }
         }
@@ -819,12 +1129,12 @@
     "Quicksort": {
         "Quicksort": {
             "best": {
-                "big_o": "O(nlog(n))",
+                "big_o": "O(n log n)",
                 "explanation": "The pivot is perfect (the median) in every partition.",
                 "example": "[3, 2, 4, 1, 5] with 3 as the pivot"
             },
             "average": {
-                "big_o": "O(nlog(n))",
+                "big_o": "O(n log n)",
                 "explanation": "On average, the data is split roughly in half each partition.",
                 "example": "[3, 2, 4, 1, 5, 6] with 3 as the pivot"
             },
@@ -835,7 +1145,357 @@
             }
         }
     },
-   
+
+    "Quickselect": {
+        "Quickselect": {
+            "worst": {
+                "big_o": "O(n²)",
+                "explanation": "The minimum or maximum value of the subarray is always chosen.",
+                "example": "[25, 23, 28, 24, 30] with 23 as the pivot"
+            },
+            "average": {
+                "big_o": "O(n)",
+                "explanation": "Data is split in half on average during each partition. We can discard the partition which does not contain the target.",
+                "example": "[37, 33, 34, 38, 31, 30] with 33 as the pivot"
+            },
+            "best": {
+                "big_o": "O(n)",
+                "explanation": "The pivot is always the median value of the subarray.",
+                "example": "[25, 23, 28, 24, 30] with 25 as the pivot"
+            }
+        }
+    },
+    
+    "MergeSort": {
+        "MergeSort": {
+            "worst": {
+                "big_o": "O(n log n)",
+                "explanation": "Merge sort always recursively divides the array into halves (for a total of $log n$ levels) and merges each level (which is an $O(n)$ operation).",
+                "example": "[9, 2, 4, 5, 1, 8, 6, 3] divides into a total of 3 levels (log_2(8) = 3)"
+            },
+            "average": {
+                "big_o": "O(n log n)",
+                "explanation": "Merge sort always recursively divides the array into halves (for a total of $log n$ levels) and merges each level (which is an O(n) operation).",
+                "example": "[27, 23, 26, 20] divides into 2 levels (log_2(4) = 2)"
+            },
+            "best": {
+                "big_o": "O(n log n)",
+                "explanation": "Even in the best case, merge sort still recursively divides the array into halves (for a total of $log n$ levels) and merges each level (which is an O(n) operation).",
+                "example": "[1, 2, 3, 4, 5, 6, 7, 8] still divides into 3 levels (log_2(8) = 3)"
+            }
+        }
+    },
+
+    "LSDRadixSort": {
+        "LSDRadixSort": {
+            "worst": {
+                "big_o": "O(kn)",
+                "explanation": "One or a few numbers in the array are much longer than the rest. The longest number has $k$ digits.",
+                "example": "[28, 33, 92, 91, 1234567891]"
+            },
+            "average": {
+                "big_o": "O(kn)",
+                "explanation": "Each number in the array will be added to and removed from a bucket $k$ times, where $k$ is the length of the longest number.",
+                "example": "[8, 144, 10, 152, 25, 5]"
+            },
+            "best": {
+                "big_o": "O(kn)",
+                "explanation": "All of the numbers in the array have relatively few digits.",
+                "example": "[3, 2, 4, 5, 1, 7]"
+            }
+        }
+    },
+
+    "HeapSort": {
+        "HeapSort": {
+            "all cases": {
+                "big_o": "O(n log n)",
+                "explanation": "Removing an element from a heap is $O(log n)$, and we do this $n$ times.",
+                "example": "[300, 200, 500, 400, 800, 900]"
+            }
+        }
+    },
+
+    "BruteForce": {
+        "Single Occurrence": {
+            "worst": {
+                "big_o": "O(mn)",
+                "explanation": "A mismatch occurs at the last comparison of the pattern to the text for every alignment.",
+                "example": "'aaab' in aaaaaaaaaaaa"
+            },
+            "best": {
+                "big_o": "O(m)",
+                "explanation": "The pattern is found in the text in the first alignment.",
+                "example": "'cs' in 'cs1332'"
+            }
+        },
+        "All Occurrences": {
+            "worst": {
+                "big_o": "O(mn)",
+                "explanation": "A mismatch occurs at the last comparison of the pattern to the text for every alignment.",
+                "example": "'aaab' in 'aaaaaaaaaaaaaaa'"
+            },
+            "best": {
+                "big_o": "O(n)",
+                "explanation": "A mismatch always occurs at the first comparison for every alignment.",
+                "example": "'caa' in 'aaaaaaaaaaaaaaa'"
+            }
+        }
+    },
+
+    "BoyerMoore": {
+        "Last Occurrence Table": {
+            "all cases": {
+                "big_o": "O(m)",
+                "explanation": "Building the Last Occurrence Table requires a linear pass through the pattern.",
+                "example": {
+                    "pattern": "shanghai",
+                    "table": {
+                        "s": 0,
+                        "h": 5,
+                        "a": 6,
+                        "n": 3,
+                        "g": 4,
+                        "i": 7,
+                        "*": -1
+                    }
+                }
+            }
+        },
+        "No Occurrences": {
+            "best": {
+                "big_o": "O(m + n/m)",
+                "explanation": "If every character of the text is not in the pattern, the pattern shifts by $m$ for each mismatch.",
+                "example": {
+                    "text": "bbbbbbbbbbbbbbbb",
+                    "pattern": "aaaaa"
+                }
+            },
+            "worst": {
+                "big_o": "O(mn)",
+                "explanation": "When there is a mismatch on first character of the pattern with a character of the text that exists in the pattern, shift by 1. If this happens for every alignment, the pattern will shift by 1 each time.",
+                "example": {
+                    "text": "aaaaaaaaaaaaaaaa",
+                    "pattern": "baaaa"
+                }
+            }
+        },
+        "Single Occurrence": {
+            "best": {
+                "big_o": "O(m)",
+                "explanation": "The pattern perfectly matches on the first alignment.",
+                "example": {
+                    "text": "abcdefgabc",
+                    "pattern": "abc"
+                }
+            },
+            "worst": {
+                "big_o": "O(mn)",
+                "explanation": "The single occurrence is at the end of the text, requiring $n$ shifts",
+                "example": {
+                    "text": "aaaaaaaaaaaaabaaa",
+                    "pattern": "baaa"
+                }
+            }
+        },
+        "All Occurrences": {
+            "best": {
+                "big_o": "O(m + n/m)",
+                "explanation": "There is not a single character of the pattern in the text, causing shifts by $m$ each time.",
+                "example": {
+                    "text": "bbbbbbbbbbbbbbbb",
+                    "pattern": "aaaaa"
+                }
+            },
+            "worst": {
+                "big_o": "O(mn)",
+                "explanation": "When there is a mismatch on first character of the pattern with a character of the text that exists in the pattern, shift by 1. If this happens for every alignment, the pattern will shift by 1 each time.",
+                "example": {
+                    "text": "aaaaaaaaaaaaaaaaaaaa",
+                    "pattern": "baaaa"
+                }
+            }
+        }
+    },
+
+    "KMP": {
+        "Failure Table": {
+            "all cases": {
+                "big_o": "O(m)",
+                "explanation": "Building the Failure Table requires a linear pass through the pattern.",
+                "example": {
+                    "pattern": "abaababac",
+                    "table": [0, 0, 1, 1, 2, 3, 2, 3, 0]
+                }
+            }
+        },
+        "No Occurrences": {
+            "all cases": {
+                "big_o": "O(m + n)",
+                "explanation": "In cases where no matches occur, the algorithm processes each character in the text and pattern once, plus the preprocessing time.",
+                "example": {
+                    "text": "abcdefgh",
+                    "pattern": "xyz"
+                }
+            }
+        },
+        "Single Occurrence": {
+            "best": {
+                "big_o": "O(m)",
+                "explanation": "When the pattern matches on the first alignment without any mismatches.",
+                "example": {
+                    "text": "abcdefgabc",
+                    "pattern": "abc"
+                }
+            },
+            "worst": {
+                "big_o": "O(m + n)",
+                "explanation": "KMP handles repeated pattern occurrences efficiently, scanning through the text in linear time, plus the preprocessing time.",
+                "example": {
+                    "text": "ababacad",
+                    "pattern": "abac"
+                }
+            }
+        },
+        "All Occurrences": {
+            "all cases": {
+                "big_o": "O(m + n)",
+                "explanation": "KMP handles repeated pattern occurrences efficiently, scanning through the text in linear time, plus the preprocessing time.",
+                "example": {
+                    "text": "abcabcabcabc",
+                    "pattern": "abc"
+                }
+            }
+        }
+    },
+    
+    "RabinKarp": {
+        "Calculate Initial Hashes": {
+            "all cases": {
+                "big_o": "O(m)",
+                "explanation": "Calculate the hash of the pattern once, and then calculate the first $m$ characters of the text, for $O(2m)$ work.",
+                "example": {
+                    "text": "abcdefgh",
+                    "pattern": "abc"
+                }
+            }
+        },
+        "No Occurrences": {
+            "best": {
+                "big_o": "O(m + n)",
+                "explanation": "Assume the hash of the pattern does not equal hash of text when strings are not equal. With no hash collisions, Rabin-Karp skips mismatches after rolling the hash.",
+                "example": {
+                    "text": "abcdefgh",
+                    "pattern": "xyz"
+                }
+            },
+            "worst": {
+                "big_o": "O(mn)",
+                "explanation": "Assume pattern hash and text hash is always equal. Then there will be hash collisions for every substring to be compared, resulting in a brute-force approach. If every character except the last matches, then this is $O(mn)$ work.",
+                "example": {
+                    "text": "aaaaaa",
+                    "pattern": "aab"
+                }
+            }
+        },
+        "Single Occurrence": {
+            "best": {
+                "big_o": "O(m)",
+                "explanation": "The pattern matches on the first check after hash comparison, where we compare $m$ characters of the pattern and text.",
+                "example": {
+                    "text": "abcdefg",
+                    "pattern": "abc",
+                    "occurrences": "one"
+                }
+            },
+            "worst": {
+                "big_o": "O(mn)",
+                "explanation": "When there are many hash collisions due to a bad hash function, Rabin-Karp degenerates to $O(mn)$ as each substring must be compared.",
+                "example": {
+                    "text": "aaabaa",
+                    "pattern": "aab",
+                    "occurrences": "one with collisions"
+                }
+            }
+        },
+        "All Occurrences": {
+            "best": {
+                "big_o": "O(m + n)",
+                "explanation": "With a good hash function, there will be collisions only when the pattern and text match, thus Rabin-Karp efficiently finds all matches in linear time.",
+                "example": {
+                    "text": "xyzaaaxyz",
+                    "pattern": "xyz",
+                    "occurrences": "all"
+                }
+            },
+            "worst": {
+                "big_o": "O(mn)",
+                "explanation": "When hash collisions are frequent due to a bad hash function (i.e. every character hashes to 0), Rabin-Karp reverts to a brute-force comparison for each substring.",
+                "example": {
+                    "text": "abaaaaab",
+                    "pattern": "ab"
+                }
+            }
+        }
+    },
+
+    "BFS": {
+        "BFS": {
+            "all cases": {
+                "big_o": "O(|V|+|E|)",
+                "explanation": "For each vertex, we iterate through all of its adjacent edges. Thus, we visit each vertex once and process each edge once.",
+                "example": "A connects to B and C; B connects to D"
+            }
+        }
+    },
+
+    "DFS": {
+        "DFS Recursive": {
+            "all cases": {
+                "big_o": "O(|V|+|E|)",
+                "explanation": "For each vertex, we iterate through all of its adjacent edges. Thus, we visit each vertex once and process each edge once.",
+                "example": "A connects to B and C; B connects to D"
+            }
+        },
+        "DFS Iterative": {
+            "all cases": {
+                "big_o": "O(|V|+|E|)",
+                "explanation": "For each vertex, we iterate through all of its adjacent edges. Thus, we visit each vertex once and process each edge once.",
+                "example": "A connects to B and C; B connects to D"
+            }
+        }
+    },
+
+    "Dijkstras": {
+        "Dijkstras": {
+            "all cases": {
+                "big_o": "O((|V|+|E|) log|V|)",
+                "explanation": "For each vertex, we iterate through all of its adjacent edges like in BFS. We add edges to a priority queue to decide in what order to explore, which is logarithmic for each step (it uses a heap!)",
+                "example": "A -(2)-> B; B -(2)-> C; A -(3)-> C: shortest path from A to C"
+            }
+        }
+    },
+
+    "Prims": {
+        "Prims": {
+            "all cases": {
+                "big_o": "O((|V|+|E|) log|V|)",
+                "explanation": "For each vertex, we iterate through all of its adjacent edges like in BFS. We add edges to a priority queue to decide in what order to explore, which is logarithmic for each step (it uses a heap!)",
+                "example": "A connects to B; B connects to C; C connects to A"
+            }
+        }
+    },
+
+    "Kruskals": {
+        "Kruskals": {
+            "all cases": {
+                "big_o": "O(|E|log|E|)",
+                "explanation": "We use a priority queue to incrementally add edges to the MST, which is logarithmic for each step (it uses a heap!)",
+                "example": "A connects to B; B connects to C; C connects to A"
+            }
+        }
+    },
+
     "LCS": {
         "Longest Common Subsequence": {
             "all cases": {
