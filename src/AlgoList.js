@@ -17,7 +17,7 @@ export const algoMap = {
 	DequeArray: ['Deque (Array)', algos.DequeArray, true],
 	DequeLL: ['Deque (LinkedList)', algos.DequeLL],
 	BST: ['Binary Search Tree', algos.BST, true],
-	Heap: ['Heaps / PQs', algos.Heap],
+	Heap: ['Heap / PriorityQueue', algos.Heap],
 	SkipList: ['SkipList', algos.SkipList],
 	OpenHash: ['HashMap (Probing)', algos.OpenHash],
 	ClosedHash: ['HashMap (Chaining)', algos.ClosedHash],

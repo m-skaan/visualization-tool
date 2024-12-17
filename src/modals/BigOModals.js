@@ -50,7 +50,7 @@ const ToggleBlurCell = ({ text }) => {
 
 	return (
 		<td
-			style={{ width: '10%' }}
+			style={{ width: '16%' }}
 			className={isBlurred ? 'blur' : ''}
 			onMouseEnter={handleMouseEnter}
 		>

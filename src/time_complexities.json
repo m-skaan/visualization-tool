@@ -1,48 +1,53 @@
 {
     "ArrayList": {
         "Add to Front": {
-            "best": {
+            "worst": {
                 "big_o": "O(n)",
-                "explanation": "You always have to shift $n$ elements to the right.",
-                "example": "[null, null, null, null] add 0"
+                "explanation": "Resizing the array and shifting $n$ elements are each $O(n)$.",
+                "example": "[1, 2, 3, 4] add 0"
             },
             "average": {
                 "big_o": "O(n)",
                 "explanation": "You always have to shift $n$ elements to the right.",
                 "example": "[1, 2, 3, null] add 0"
             },
-            "worst": {
+            "best": {
                 "big_o": "O(n)",
-                "explanation": "Resizing the array and shifting $n$ elements are each $O(n)$.",
-                "example": "[1, 2, 3, 4] add 0"
+                "explanation": "You always have to shift $n$ elements to the right.",
+                "example": "[null, null, null, null] add 0"
             }
         },
         "Add to Back": {
-            "best": {
-                "big_o": "O(1)",
-                "explanation": "No shifting is needed because the array is not full."
+            "worst": {
+                "big_o": "O(1)*",
+                "explanation": "Typically constant time, except for the rare case where you have to resize."
+            },
+            "worst (unamortized)": {
+                "big_o": "O(n)",
+                "explanation": "If the array is full, you have to resize it by making a new array."
             },
             "average": {
                 "big_o": "O(1)",
                 "explanation": "No shifting is needed except for an occasional array resize."
             },
-            "worst": {
-                "big_o": "O(n)",
-                "explanation": "If the array is full, you have to resize it by making a new array."
-            }
-        },
-        "Add at Index": {
             "best": {
                 "big_o": "O(1)",
-                "explanation": "Adding to the back of the array."
+                "explanation": "No shifting is needed because the array is not full."
+            }
+
+        },
+        "Add at Index": {
+            "worst": {
+                "big_o": "O(n)",
+                "explanation": "Resizing the array and shifting $n$ elements are each $O(n)$."
             },
             "average": {
                 "big_o": "O(n)",
                 "explanation": "Some elements will be shifted to the right; on average, $n/2$ will."
             },
-            "worst": {
-                "big_o": "O(n)",
-                "explanation": "Resizing the array and shifting $n$ elements are each $O(n)$."
+            "best": {
+                "big_o": "O(1)",
+                "explanation": "Adding to the back of the array."
             }
         },
         "Remove from Front": {
@@ -54,21 +59,21 @@
         "Remove from Back": {
             "all cases": {
                 "big_o": "O(1)",
-                "explanation": "No shifting or resize is ever needed."
+                "explanation": "No shifting or resizing is ever needed."
             }
         },
         "Remove at Index": {
-            "best": {
-                "big_o": "O(1)",
-                "explanation": "If you remove the last element, you don't have to shift any elements."
+            "worst": {
+                "big_o": "O(n)",
+                "explanation": "If you remove the first element, You have to shift $n$ elements to the left."
             },
             "average": {
                 "big_o": "O(n)",
                 "explanation": "You have to shift all elements after the index to the left."
             },
-            "worst": {
-                "big_o": "O(n)",
-                "explanation": "If you remove the first element, You have to shift $n$ elements to the left."
+            "best": {
+                "big_o": "O(1)",
+                "explanation": "If you remove the last element, you don't have to shift any elements."
             }
         }
     },
@@ -275,7 +280,7 @@
         }
     },
 
-    "CircularSinglyLinkedList": {
+    "CircularlyLinkedList": {
         "Add to Front": {
             "all cases": {
                 "big_o": "O(1)",
@@ -349,12 +354,12 @@
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "No elements need to be shifted when adding to back. Additionally, the average case doesn't involve resizing.",
+                "explanation": "No elements need to be shifted when adding to the back. Additionally, the average case doesn't involve resizing.",
                 "example": "[1, 2, null] add 3"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "No elements need to be shifted when adding to back. Additionally, the best case doesn't involve resizing.",
+                "explanation": "No elements need to be shifted when adding to the back. Additionally, the best case doesn't involve resizing.",
                 "example": "[1, 2, null] add 3"
             }
         },
@@ -393,12 +398,12 @@
             },
             "average": {
                 "big_o": "O(1)",
-                "explanation": "No elements need to be shifted when adding to back. Additionally, the average case doesn't involve resizing.",
+                "explanation": "No elements need to be shifted when adding to the back. Additionally, the average case doesn't involve resizing.",
                 "example": "[1, 2, null] add 3"
             },
             "best": {
                 "big_o": "O(1)",
-                "explanation": "No elements need to be shifted when adding to back. Additionally, the best case doesn't involve resizing.",
+                "explanation": "No elements need to be shifted when adding to the back. Additionally, the best case doesn't involve resizing.",
                 "example": "[1, 2, null] add 3"
             }
         },
@@ -680,46 +685,46 @@
             "average": {
                 "big_o": "O(1)",
                 "explanation": "With a good hash function, there are few or no collisions, so on average you just add the entry to the array at its hashed index.",
-                "example": "Adding an entry with key that has calculated index 7, and index 7 in the array is empty."
+                "example": "Adding an entry with a key that has calculated index 7, and index 7 in the array is empty."
             },
             "best": {
                 "big_o": "O(1)",
                 "explanation": "If there are no collisions, you can add the entry directly to its hashed index.",
-                "example": "Adding an entry with key that has calculated index 7, and index 7 in the array is empty."
+                "example": "Adding an entry with a key that has calculated index 7, and index 7 in the array is empty."
             }
         },
         "Remove": {
             "worst": {
                 "big_o": "O(n)",
                 "explanation": "If every entry had the same hashcode, then when you want to remove an entry, you'd have to probe over every other entry.",
-                "example": "A HashMap with haschode function always returning 1."
+                "example": "A HashMap with hashcode function always returning 1."
             },
             "average": {
                 "big_o": "O(1)",
                 "explanation": "With a good hash function, there are few or no collisions, so on average you just remove the entry at its calculated index without probing.",
-                "example": "Removing an entry with key that has calculated index 7, and index 7 contains the key you're looking for."
+                "example": "Removing an entry with a key that has calculated index 7, and index 7 contains the key you're looking for."
             },
             "best": {
                 "big_o": "O(1)",
                 "explanation": "If there are no collisions, remove the entry from its calculated index in the array.",
-                "example": "Removing an entry with key that has calculated index 7, and index 7 contains the key you're looking for."
+                "example": "Removing an entry with a key that has calculated index 7, and index 7 contains the key you're looking for."
             }
         },
         "Find": {
             "worst": {
                 "big_o": "O(n)",
                 "explanation": "If every entry had the same hashcode, then when you want to find an entry, you'd have to probe over every other entry.",
-                "example": "A HashMap with haschode function always returning 1."
+                "example": "A HashMap with hashcode function always returning 1."
             },
             "average": {
                 "big_o": "O(1)",
                 "explanation": "With a good hash function, there are few or no collisions, so on average you can just find the entry at its calculated index without probing.",
-                "example": "Finding an entry with key that has calculated index 7, and index 7 contains the key you're looking for."
+                "example": "Finding an entry with a key that has calculated index 7, and index 7 contains the key you're looking for."
             },
             "best": {
                 "big_o": "O(1)",
                 "explanation": "If there are no collisions, find the entry from its calculated index in the array.",
-                "example": "Finding an entry with key that has calculated index 7, and index 7 contains the key you're looking for."
+                "example": "Finding an entry with a key that has calculated index 7, and index 7 contains the key you're looking for."
             }
         },
         "Resize": {
@@ -866,8 +871,13 @@
     "Heap": {
         "Add": {
             "worst": {
-                "big_o": "O(log n)",
-                "explanation": "When adding a new element, in the worst cae, it bubbles up to the root through $logn$ levels.",
+                "big_o": "O(log n)*",
+                "explanation": "When adding a new element, in the worst case, it bubbles up to the root through $logn$ levels.",
+                "example": "Add 10 to [5,4,3]: becomes [10,5,3,4]"
+            },
+            "worst (unamortized)": {
+                "big_o": "O(n)",
+                "explanation": "In the resize case, we must copy all the data to a new larger array.",
                 "example": "Add 10 to [5,4,3]: becomes [10,5,3,4]"
             },
             "average": {
@@ -876,8 +886,8 @@
                 "example": "Add 6 to [8,4,3]: becomes [8,6,3,4]"
             },
             "best": {
-                "big_o": "???",
-                "explanation": "???",
+                "big_o": "O(1)",
+                "explanation": "In the best case, the newly added data belongs in the leaf level and does not have to be bubbled up.",
                 "example": "???"
             }
         },
@@ -893,15 +903,15 @@
                 "example": "Remove from [9,6,8,4,5]: becomes [8,6,5,4]"
             },
             "best": {
-                "big_o": "O(1)",
-                "explanation": "Even in the best case, we must check both children while bubbling down.",
-                "example": "Remove from [100, 7, 99, 6, 5, 98, 97, 4, 3, 2, 1, 96]: becomes [7, 96, 99, 6, 5, 98, 97, 4, 3, 2, 1]"
+                "big_o": "??",
+                "explanation": "??",
+                "example": "??"
             }
         },
         "BuildHeap": {
             "all cases": {
                 "big_o": "O(n)",
-                "explanation": "Most nodes are near bottom and require minimal adjustments. More specifically, about half of all data are on the leaf layer, and a quarter are on the second-to-last level, etc.",
+                "explanation": "Most nodes are near the bottom and require minimal adjustments. More specifically, about half of all data are on the leaf layer, and a quarter are on the second-to-last level, etc.",
                 "example": "Build from [3,1,4,5,2]: becomes [5,3,4,1,2]"
             }
         }
@@ -928,7 +938,7 @@
         "Remove": {
             "worst": {
                 "big_o": "O(log n)",
-                "explanation": "Search for the node, remove it, then rebalance up to root. May need to find predecessor/successor at a leaf node. Each rotation is $O(1)$.",
+                "explanation": "Search for the node, remove it, then rebalance up to root. May need to find a predecessor/successor at a leaf node. Each rotation is $O(1)$.",
                 "example": "Current tree: [6, 3, 9, null, 4, 7, 16, null, null, null, null, 11, null], Remove 6"
             },
             "average": {
@@ -1175,19 +1185,19 @@
             },
             "average": {
                 "big_o": "O(n log n)",
-                "explanation": "Merge sort always recursively divides the array into halves (for a total of $log n$ levels) and merges each level (which is an O(n) operation).",
+                "explanation": "Merge sort always recursively divides the array into halves (for a total of $log n$ levels) and merges each level (which is an $O(n)$ operation).",
                 "example": "[27, 23, 26, 20] divides into 2 levels (log_2(4) = 2)"
             },
             "best": {
                 "big_o": "O(n log n)",
-                "explanation": "Even in the best case, merge sort still recursively divides the array into halves (for a total of $log n$ levels) and merges each level (which is an O(n) operation).",
+                "explanation": "Even in the best case, merge sort still recursively divides the array into halves (for a total of $log n$ levels) and merges each level (which is an $O(n)$ operation).",
                 "example": "[1, 2, 3, 4, 5, 6, 7, 8] still divides into 3 levels (log_2(8) = 3)"
             }
         }
     },
 
-    "LSDRadixSort": {
-        "LSDRadixSort": {
+    "LSDRadix": {
+        "LSDRadix": {
             "worst": {
                 "big_o": "O(kn)",
                 "explanation": "One or a few numbers in the array are much longer than the rest. The longest number has $k$ digits.",
@@ -1273,7 +1283,7 @@
             },
             "worst": {
                 "big_o": "O(mn)",
-                "explanation": "When there is a mismatch on first character of the pattern with a character of the text that exists in the pattern, shift by 1. If this happens for every alignment, the pattern will shift by 1 each time.",
+                "explanation": "When there is a mismatch on the first character of the pattern with a character of the text that exists in the pattern, shift by 1. If this happens for every alignment, the pattern will shift by 1 each time.",
                 "example": {
                     "text": "aaaaaaaaaaaaaaaa",
                     "pattern": "baaaa"
@@ -1309,7 +1319,7 @@
             },
             "worst": {
                 "big_o": "O(mn)",
-                "explanation": "When there is a mismatch on first character of the pattern with a character of the text that exists in the pattern, shift by 1. If this happens for every alignment, the pattern will shift by 1 each time.",
+                "explanation": "When there is a mismatch on the first character of the pattern with a character of the text that exists in the pattern, shift by 1. If this happens for every alignment, the pattern will shift by 1 each time.",
                 "example": {
                     "text": "aaaaaaaaaaaaaaaaaaaa",
                     "pattern": "baaaa"
@@ -1391,7 +1401,7 @@
             },
             "worst": {
                 "big_o": "O(mn)",
-                "explanation": "Assume pattern hash and text hash is always equal. Then there will be hash collisions for every substring to be compared, resulting in a brute-force approach. If every character except the last matches, then this is $O(mn)$ work.",
+                "explanation": "Assume pattern hash and text hash are always equal. Then there will be hash collisions for every substring to be compared, resulting in a brute-force approach. If every character except the last matches, then this is $O(mn)$ work.",
                 "example": {
                     "text": "aaaaaa",
                     "pattern": "aab"
@@ -1466,8 +1476,8 @@
         }
     },
 
-    "Dijkstras": {
-        "Dijkstras": {
+    "Dijkstra": {
+        "Dijkstra": {
             "all cases": {
                 "big_o": "O((|V|+|E|) log|V|)",
                 "explanation": "For each vertex, we iterate through all of its adjacent edges like in BFS. We add edges to a priority queue to decide in what order to explore, which is logarithmic for each step (it uses a heap!)",
@@ -1476,8 +1486,8 @@
         }
     },
 
-    "Prims": {
-        "Prims": {
+    "Prim": {
+        "Prim": {
             "all cases": {
                 "big_o": "O((|V|+|E|) log|V|)",
                 "explanation": "For each vertex, we iterate through all of its adjacent edges like in BFS. We add edges to a priority queue to decide in what order to explore, which is logarithmic for each step (it uses a heap!)",
@@ -1486,8 +1496,8 @@
         }
     },
 
-    "Kruskals": {
-        "Kruskals": {
+    "Kruskal": {
+        "Kruskal": {
             "all cases": {
                 "big_o": "O(|E|log|E|)",
                 "explanation": "We use a priority queue to incrementally add edges to the MST, which is logarithmic for each step (it uses a heap!)",
@@ -1505,3 +1515,5 @@
         }
     }
 }
+
+

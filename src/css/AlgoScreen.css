@@ -202,7 +202,7 @@ em {
 .VisualizationMainPage .bigo {
 	border-collapse: collapse; /* Ensures borders are not doubled */
 	position: absolute;
-	min-width: 35%;
+	min-width: 40%;
 }
 
 .bigo th,
