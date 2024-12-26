@@ -23,6 +23,8 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 		});
 	}, [dsaFilter]);
 
+	console.log("Filtered Algorithm List:", filteredAlgoList);
+
 	const relatedSearchesList = useMemo(() => {
 		const relatedSet = new Set();
 
