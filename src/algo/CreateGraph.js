@@ -35,3 +35,5 @@ import Graph from './Graph.js';
 import { act } from '../anim/AnimationMain';
 import pseudocodeText from '../pseudocode.json';
 
+export default class GraphCreate extends Graph {
+}

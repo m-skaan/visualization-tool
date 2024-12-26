@@ -39,3 +39,4 @@ export { default as SplayTree } from './SplayTree';
 export { default as StackArray } from './StackArray';
 export { default as StackLL } from './StackLL';
 export { default as HeapSort } from './HeapSort';
+export { default as CreateGraph } from './CreateGraph';
