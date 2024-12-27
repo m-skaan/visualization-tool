@@ -136,21 +136,6 @@ export default class GraphCreate extends Graph {
 		this.lastIndex = this.nextIndex;
 	}
 
-	reset() {
-		this.nextIndex = this.lastIndex;
-		this.listID = [];
-		this.visitedID = [];
-		this.messageID = [];
-	}
-
-	stackCallback(physical) {
-		if (this.physicalStack !== physical) {
-			this.physicalStack = physical;
-			this.animationManager.resetAll();
-			this.setup(this.adj_matrix);
-		}
-	}
-
 	startCallback() {
 		if (this.listField.value !== '') {
 			const adjacencyList = this.listField.value.split("\n").map((line) => {
