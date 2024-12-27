@@ -90,12 +90,10 @@ export default class GraphCreate extends Graph {
   		this.listField.style.width = '200px'; // Adjust width as needed
   		this.listField.style.height = '100px'; // Adjust height as needed
   		horizontalGroup.appendChild(this.listField);
-
+		addDivisorToAlgorithmBar();
 		this.runButton = addControlToAlgorithmBar('Button', 'Run');
 		this.runButton.onclick = this.startCallback.bind(this);
 		this.controls.push(this.runButton);
-
-		addDivisorToAlgorithmBar();
 	}
 
 	setup(adjMatrix) {
@@ -115,35 +113,9 @@ export default class GraphCreate extends Graph {
 		this.cmd(
 			act.createLabel,
 			this.nextIndex++,
-			'Visited Set:',
+			'Validated Adjacency List:',
 			VISITED_START_X - 5,
 			VISITED_START_Y - 25,
-			0,
-		);
-		this.cmd(
-			act.createLabel,
-			this.nextIndex++,
-			'List:',
-			LIST_START_X - 5,
-			LIST_START_Y - 25,
-			0,
-		);
-		this.cmd(
-			act.createLabel,
-			this.nextIndex++,
-			'Current vertex:',
-			CURRENT_VERTEX_LABEL_X,
-			CURRENT_VERTEX_LABEL_Y,
-			0,
-		);
-
-		this.stackLabelID = this.nextIndex++;
-		this.cmd(
-			act.createLabel,
-			this.stackLabelID,
-			this.physicalStack ? 'Stack:' : 'Recursive stack:   Recursive calls:',
-			STACK_LABEL_X,
-			STACK_LABEL_Y,
 			0,
 		);
 
@@ -170,7 +142,7 @@ export default class GraphCreate extends Graph {
 	}
 
 	startCallback() {
-		if (this.startField.value !== '') {
+		if (this.listField.value !== '') {
 			let startValue = this.startField.value;
 			this.startField.value = '';
 			startValue = startValue.toUpperCase();
@@ -180,7 +152,7 @@ export default class GraphCreate extends Graph {
 				this.implementAction(this.doDFSRecursive.bind(this), startValue);
 			}
 		} else {
-			this.shake(this.startButton);
+			this.shake(this.runButton);
 		}
 	}
 
