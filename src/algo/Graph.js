@@ -399,6 +399,7 @@ export default class Graph extends Algorithm {
 	}
 
 	setup(adj_matrix) {
+		console.log(adj_matrix);
 		this.commands = [];
 		this.circleID = new Array(this.size);
 		for (let i = 0; i < this.size; i++) {
@@ -424,6 +425,7 @@ export default class Graph extends Algorithm {
 					this.adj_matrixID[i][j] = this.nextIndex++;
 				}
 			}
+			console.log(adj_matrix);
 			this.buildEdges();
 		} else {
 			this.adj_matrix = new Array(this.size);
