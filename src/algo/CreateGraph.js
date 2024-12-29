@@ -24,7 +24,7 @@
 // authors and should not be interpreted as representing official policies, either expressed
 // or implied, of the University of San Francisco
 
-import {
+import Algorithm, {
 	addControlToAlgorithmBar,
 	addDivisorToAlgorithmBar,
 	addGroupToAlgorithmBar,
@@ -73,9 +73,9 @@ const LARGE_RECURSION_SPACING_Y = 15;
 const CODE_START_X = 1000;
 const CODE_START_Y = 50;
 
-export default class GraphCreate extends Graph {
+export default class GraphCreate extends Algorithm {
 	constructor(am, w, h) {
-		super(am, w, h, BFS_DFS_ADJ_LIST);
+		super(am, w, h);
 		this.addControls();
 	}
 
@@ -103,48 +103,37 @@ export default class GraphCreate extends Graph {
 		addDivisorToAlgorithmBar();
 		this.runButton = addControlToAlgorithmBar('Button', 'Run');
 		this.runButton.onclick = this.startCallback.bind(this);
-		this.controls.push(this.runButton);
-	}
-
-	setup(adjMatrix) {
-		super.setup(adjMatrix);
-		this.commands = [];
-		this.messageID = [];
-
-		this.visited = [];
-
-		this.stackID = [];
-		this.listID = [];
-		this.visitedID = [];
-
-		this.infoLabelID = this.nextIndex++;
-		this.cmd(act.createLabel, this.infoLabelID, '', INFO_MSG_X, INFO_MSG_Y, 0);
-
-		this.cmd(
-			act.createLabel,
-			this.nextIndex++,
-			'Validated Adjacency List:',
-			VISITED_START_X - 5,
-			VISITED_START_Y - 25,
-			0,
-		);
-
-		this.animationManager.setAllLayers([0, 32, this.currentLayer]);
-		this.animationManager.startNewAnimation(this.commands);
-		this.animationManager.skipForward();
-		this.animationManager.clearHistory();
-		this.lastIndex = this.nextIndex;
+		//this.controls.push(this.runButton);
 	}
 
 	startCallback() {
 		if (this.listField.value !== '') {
+			console.log(this.listField.value);
 			const adjacencyList = this.listField.value.split("\n").map((line) => {
-				const [node, neighbors] = line.split("->");
-				return { node, neighbors: neighbors.split(",").map((n) => n.trim()) };
+				let [node, neighbors] = line.split("->");
+				return {node, neighbors};
 			  });
 			console.log("Parsed Adjacency List: ", adjacencyList);
+			this.setup(adjacencyList);
 		} else {
 			this.shake(this.runButton);
 		}
+	}
+
+	setup(adjList) {
+    	// Create a mapping from node name to index
+    	const nodeIndex = {"A":0,"B":1,"C":2,"D":3,"E":4,"F":5,"G":6,"H":7};
+		console.log('setup called with:', adjList);
+		adjList.forEach(({ node, neighbors }) => {
+			if (node !== "") {
+				const fromIndex = nodeIndex[node]; // Get the index of the current node
+				console.log(typeof neighbors);
+				console.log(`Processing node: ${node}, neighbors: ${neighbors}`);
+				//console.log("1", neighbors.split(","));
+				//const neighbors1 = neighbors.split(",");
+				//console.log(neighbors1);
+			}
+			//console.log("hi", neighbors.split(","));
+		});
 	}
 }
