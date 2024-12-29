@@ -75,6 +75,20 @@ const CODE_START_Y = 50;
 
 export const VERTEX_INDEX_COLOR = '#0000FF';
 
+let adjMatrix =
+	//A     B      C     D      E     F      G      H
+	/*A*/ [
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		/*B*/ [0, 0, 0, 0, 0, 0, 0, 0],
+		/*C*/ [0, 0, 0, 0, 0, 0, 0, 0],
+		/*D*/ [0, 0, 0, 0, 0, 0, 0, 0],
+		/*E*/ [0, 0, 0, 0, 0, 0, 0, 0],
+		/*F*/ [0, 0, 0, 0, 0, 0, 0, 0],
+		/*G*/ [0, 0, 0, 0, 0, 0, 0, 1],
+		/*H*/ [0, 0, 0, 0, 0, 0, 0, 0],
+	];
+
+
 export default class GraphCreate extends Algorithm {
     constructor(am, w, h) {
         super(am, w, h);
@@ -129,6 +143,8 @@ export default class GraphCreate extends Algorithm {
         console.log('setup called with:', adjList);
         // Create the adjacency list object
         this.buildAdjList(adjList);
+		this.buildAdjMatrix();
+		this.animationManager.resetAll();
         this.visualizeGraph();
     }
 
@@ -148,6 +164,29 @@ export default class GraphCreate extends Algorithm {
         });
         console.log("Final Adjacency List:", this.adjList);
     }
+
+	buildAdjMatrix() {
+		// Get all unique nodes from the adjacency list
+		const nodes = Object.keys(this.adjList);
+		const nodeCount = nodes.length;	
+	
+		// Create a mapping from node to index
+		const nodeIndexMap = nodes.reduce((map, node, index) => {
+			map[node] = index;
+			return map;
+		}, {});
+	
+		// Fill the adjacency matrix based on the adjacency list
+		nodes.forEach((node) => {
+			const nodeIndex = nodeIndexMap[node];
+			this.adjList[node].forEach((neighbor) => {
+				const neighborIndex = nodeIndexMap[neighbor];
+				adjMatrix[nodeIndex][neighborIndex] = 1;
+			});
+		});
+	
+		console.log("Adjacency Matrix:", adjMatrix);
+	}	
 
 	visualizeGraph() {
 		// Create SVG container for the graph
@@ -218,6 +257,5 @@ export default class GraphCreate extends Algorithm {
 		}
 	
 		return positions;
-	}
-	
+	}	
 }
