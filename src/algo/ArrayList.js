@@ -205,7 +205,10 @@ export default class ArrayList extends Algorithm {
 
 	setURLData(searchParams) {
 		this.implementAction(this.clearAll.bind(this));
-		const dataList = searchParams.get("data").split(",").filter(item => item.trim() !== "");
+		const dataList = searchParams
+			.get('data')
+			.split(',')
+			.filter(item => item.trim() !== '');
 		dataList.forEach(dataEntry => {
 			this.addValueField.value = dataEntry.substring(0, 4);
 
@@ -216,9 +219,24 @@ export default class ArrayList extends Algorithm {
 				const addVal = this.addValueField.value;
 				this.addValueField.value = '';
 				if (this.size === this.length) {
-					this.implementAction(this.resize.bind(this), addVal, this.size, false, true, false);
+					this.implementAction(
+						this.resize.bind(this),
+						addVal,
+						this.size,
+						false,
+						true,
+						false,
+					);
 				} else {
-					this.implementAction(this.add.bind(this), addVal, this.size, false, true, false, true);
+					this.implementAction(
+						this.add.bind(this),
+						addVal,
+						this.size,
+						false,
+						true,
+						false,
+						true,
+					);
 				}
 			} else {
 				this.shake(this.addBackButton);

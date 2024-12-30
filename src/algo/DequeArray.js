@@ -142,7 +142,10 @@ export default class DequeArray extends Algorithm {
 
 	setURLData(searchParams) {
 		this.implementAction(this.clearAll.bind(this));
-		const dataList = searchParams.get("data").split(",").filter(item => item.trim() !== "");
+		const dataList = searchParams
+			.get('data')
+			.split(',')
+			.filter(item => item.trim() !== '');
 		dataList.forEach(dataEntry => {
 			this.addField.value = dataEntry.substring(0, 4);
 
@@ -161,7 +164,7 @@ export default class DequeArray extends Algorithm {
 			} else {
 				this.shake(this.addLastButton);
 			}
-	
+
 			this.animationManager.skipForward();
 			this.animationManager.clearHistory();
 		});

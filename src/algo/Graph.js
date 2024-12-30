@@ -200,15 +200,6 @@ export default class Graph extends Algorithm {
 		}
 	}
 
-	//overloaded Callback for use with CreateGraph class
-	smallGraphCallback(adj_matrix) {
-		if (this.size !== SMALL_SIZE) {
-			this.animationManager.resetAll();
-			console.log("In the parent:", adj_matrix);
-			this.setup_small(adj_matrix);
-		}
-	}
-
 	largeGraphCallback() {
 		if (this.size !== LARGE_SIZE) {
 			this.animationManager.resetAll();
@@ -408,7 +399,6 @@ export default class Graph extends Algorithm {
 	}
 
 	setup(adj_matrix) {
-		console.log(adj_matrix);
 		this.commands = [];
 		this.circleID = new Array(this.size);
 		for (let i = 0; i < this.size; i++) {
@@ -434,7 +424,6 @@ export default class Graph extends Algorithm {
 					this.adj_matrixID[i][j] = this.nextIndex++;
 				}
 			}
-			console.log(adj_matrix);
 			this.buildEdges();
 		} else {
 			this.adj_matrix = new Array(this.size);

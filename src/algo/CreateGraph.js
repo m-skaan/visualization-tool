@@ -34,46 +34,9 @@ import {
 import { BFS_DFS_ADJ_LIST } from './util/GraphValues';
 import Graph from './Graph.js';
 import { act } from '../anim/AnimationMain';
-import pseudocodeText from '../pseudocode.json';
-
-const DFS_STACK_TOP_COLOR = '#0000FF';
-const VISITED_COLOR = '#99CCFF';
 
 const INFO_MSG_X = 25;
 const INFO_MSG_Y = 15;
-
-const LIST_START_X = 30;
-const LIST_START_Y = 70;
-const LIST_SPACING = 20;
-
-const VISITED_START_X = 30;
-const VISITED_START_Y = 120;
-
-const CURRENT_VERTEX_LABEL_X = 25;
-const CURRENT_VERTEX_LABEL_Y = 145;
-const CURRENT_VERTEX_X = 115;
-const CURRENT_VERTEX_Y = 151;
-
-const STACK_LABEL_X = 25;
-const STACK_LABEL_Y = 170;
-
-const STACK_START_X = 40;
-const SMALL_STACK_START_Y = 335;
-const LARGE_STACK_START_Y = 465;
-const SMALL_STACK_SPACING = 20;
-const LARGE_STACK_SPACING = 16;
-
-const RECURSION_START_X = 125;
-const RECURSION_START_Y = 185;
-const SMALL_RECURSION_SPACING_X = 20;
-const LARGE_RECURSION_SPACING_X = 10;
-const SMALL_RECURSION_SPACING_Y = 20;
-const LARGE_RECURSION_SPACING_Y = 15;
-
-const CODE_START_X = 1000;
-const CODE_START_Y = 50;
-
-const SMALL_SIZE = 8;
 
 let adjMatrix =
 	//A     B      C     D      E     F      G      H
@@ -94,35 +57,34 @@ export default class CreateGraph extends Graph {
 		this.addControls();
 		//playground here
 		this.nextIndex = 0;
-
 	}
 
 	addControls() {
 		addLabelToAlgorithmBar('Adjacency List: ');
 		const verticalGroup = addGroupToAlgorithmBar(false);
-        const horizontalGroup = addGroupToAlgorithmBar(true, verticalGroup);
-		
+		const horizontalGroup = addGroupToAlgorithmBar(true, verticalGroup);
+
 		// List text field
-        this.listField = document.createElement('textarea'); 
-        this.listField.classList.add('scrollable-textbox'); // Add a CSS class for styling
-        this.listField.style.width = '200px'; // Adjust width
-        this.listField.style.height = '100px'; // Adjust height
-		this.listField.value = "A->B,C,D,E\nB->A,G\nC->A\nD->A,F\nE->A,G\nF->D,G\nG->B,E,F,H\nH->G";
-		
+		this.listField = document.createElement('textarea');
+		this.listField.classList.add('scrollable-textbox'); // Add a CSS class for styling
+		this.listField.style.width = '200px'; // Adjust width
+		this.listField.style.height = '100px'; // Adjust height
+		this.listField.value = 'A->B,C,D,E\nB->A,G\nC->A\nD->A,F\nE->A,G\nF->D,G\nG->B,E,F,H\nH->G';
+
 		// Add an input event listener to restrict input
-        this.listField.addEventListener('input', function(event) {
-            const allowedPattern = /^[A-H->,\n]*$/; // Capital letters, ->, and spaces
-            if (!allowedPattern.test(this.value)) {
-                const cursorPosition = this.selectionStart - 1;
-                this.value = this.value.replace(/[^A-H->,\n]/g, ''); // Remove invalid characters
-                this.setSelectionRange(cursorPosition, cursorPosition); // Preserve cursor position
-            }
-        });
+		this.listField.addEventListener('input', function (event) {
+			const allowedPattern = /^[A-H->,\n]*$/; // Capital letters, ->, and spaces
+			if (!allowedPattern.test(this.value)) {
+				const cursorPosition = this.selectionStart - 1;
+				this.value = this.value.replace(/[^A-H->,\n]/g, ''); // Remove invalid characters
+				this.setSelectionRange(cursorPosition, cursorPosition); // Preserve cursor position
+			}
+		});
 
 		horizontalGroup.appendChild(this.listField);
 		addDivisorToAlgorithmBar();
 		this.runButton = addControlToAlgorithmBar('Button', 'Run');
-        this.runButton.onclick = this.startCallback.bind(this);
+		this.runButton.onclick = this.startCallback.bind(this);
 
 		addDivisorToAlgorithmBar();
 
@@ -144,7 +106,7 @@ export default class CreateGraph extends Graph {
 
 		// We are explicitly not adding the buttons below to this.controls
 		// since we don't want them to be disabled
-		let radioButtonList = addRadioButtonGroupToAlgorithmBar(
+		const radioButtonList = addRadioButtonGroupToAlgorithmBar(
 			[
 				'Logical Representation',
 				'Adjacency List Representation',
@@ -165,37 +127,34 @@ export default class CreateGraph extends Graph {
 	}
 
 	startCallback() {
-        if (this.listField.value !== '') {
-            console.log(this.listField.value);
-            // Parsing the adjacency list from the input
-            const adjacencyList = this.listField.value.split("\n").map((line) => {
-                let [node, neighbors] = line.split("->");
-                neighbors = neighbors ? neighbors.split(',') : [];
-                return { node: node.trim(), neighbors: neighbors.map(n => n.trim()) };
-            });
-            console.log("Parsed Adjacency List: ", adjacencyList);
-            this.updateAdjMatrix(adjacencyList);
+		if (this.listField.value !== '') {
+			// Parsing the adjacency list from the input
+			const adjacencyList = this.listField.value.split('\n').map(line => {
+				let [node, neighbors] = line.split('->');
+				node = node.trim();
+				neighbors = neighbors ? neighbors.split(',') : [];
+				return { node: node.trim(), neighbors: neighbors.map(n => n.trim()) };
+			});
+			this.updateAdjMatrix(adjacencyList);
 			this.smallGraphCallback(adjMatrix);
-			console.log("here");
 			//this.setup(adjMatrix);
-        } else {
-            this.shake(this.runButton);  // Shake button if no input
-        }
-    }
+		} else {
+			this.shake(this.runButton); // Shake button if no input
+		}
+	}
 
 	updateAdjMatrix(adjacencyList) {
 		adjMatrix = adjMatrix.map(row => row.map(() => -1));
 
-    	// Update adjMatrix based on the adjacency list
-    	adjacencyList.forEach(({ node, neighbors }) => {
-        const nodeIdx = node.charCodeAt(0) - 'A'.charCodeAt(0); // Map node to its fixed index
-        neighbors.forEach(neighbor => {
-            const neighborIdx = neighbor.charCodeAt(0) - 'A'.charCodeAt(0); // Map neighbor to its fixed index
-            adjMatrix[nodeIdx][neighborIdx] = 1; // Add edge
-            adjMatrix[neighborIdx][nodeIdx] = 1; // Assuming undirected graph
-        	});
-    	});
-    	console.log("Updated Global Adjacency Matrix: ", adjMatrix);
+		// Update adjMatrix based on the adjacency list
+		adjacencyList.forEach(({ node, neighbors }) => {
+			const nodeIdx = node.charCodeAt(0) - 'A'.charCodeAt(0); // Map node to its fixed index
+			neighbors.forEach(neighbor => {
+				const neighborIdx = neighbor.charCodeAt(0) - 'A'.charCodeAt(0); // Map neighbor to its fixed index
+				adjMatrix[nodeIdx][neighborIdx] = 1; // Add edge
+				adjMatrix[neighborIdx][nodeIdx] = 1; // Assuming undirected graph
+			});
+		});
 	}
 
 	setup(adjMatrix) {
@@ -251,7 +210,6 @@ export default class CreateGraph extends Graph {
 	//overloaded Callback for use with CreateGraph class
 	smallGraphCallback(adj_matrix) {
 		this.animationManager.resetAll();
-		console.log("In the parent:", adj_matrix);
 		this.setup_small(adj_matrix);
 	}
 }
