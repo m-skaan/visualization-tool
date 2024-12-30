@@ -27,6 +27,7 @@
 import {
 	addControlToAlgorithmBar,
 	addDivisorToAlgorithmBar,
+	addGroupToAlgorithmBar,
 	addLabelToAlgorithmBar,
 	addRadioButtonGroupToAlgorithmBar,
 } from './Algorithm.js';
@@ -97,7 +98,33 @@ export default class DFS extends Graph {
 	}
 
 	addControls() {
-		addLabelToAlgorithmBar('Start vertex: ');
+		addLabelToAlgorithmBar('Adjacency List: ');
+		const verticalGroup = addGroupToAlgorithmBar(false);
+        const horizontalGroup = addGroupToAlgorithmBar(true, verticalGroup);
+		
+		// List text field
+        this.listField = document.createElement('textarea'); 
+        this.listField.classList.add('scrollable-textbox'); // Add a CSS class for styling
+        this.listField.style.width = '200px'; // Adjust width
+        this.listField.style.height = '100px'; // Adjust height
+		
+		// Add an input event listener to restrict input
+        this.listField.addEventListener('input', function(event) {
+            const allowedPattern = /^[A-H->,\n]*$/; // Capital letters, ->, and spaces
+            if (!allowedPattern.test(this.value)) {
+                const cursorPosition = this.selectionStart - 1;
+                this.value = this.value.replace(/[^A-H->,\n]/g, ''); // Remove invalid characters
+                this.setSelectionRange(cursorPosition, cursorPosition); // Preserve cursor position
+            }
+        });
+
+		horizontalGroup.appendChild(this.listField);
+		addDivisorToAlgorithmBar();
+		this.runButton = addControlToAlgorithmBar('Button', 'Run');
+        this.runButton.onclick = this.startCallback.bind(this);
+
+
+		/*
 
 		this.startField = addControlToAlgorithmBar('Text', '');
 		this.startField.style.textAlign = 'center';
@@ -111,7 +138,7 @@ export default class DFS extends Graph {
 
 		this.startButton = addControlToAlgorithmBar('Button', 'Run');
 		this.startButton.onclick = this.startCallback.bind(this);
-		this.controls.push(this.startButton);
+		this.controls.push(this.startButton);*/
 
 		addDivisorToAlgorithmBar();
 
