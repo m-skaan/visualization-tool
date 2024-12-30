@@ -125,7 +125,44 @@ export default class DFS extends Graph {
 
 		addDivisorToAlgorithmBar();
 
-		super.addControls();
+		let radioButtonList = addRadioButtonGroupToAlgorithmBar(
+			['Small Graph', 'Large Graph'],
+			'GraphSize',
+		);
+
+		this.smallGraphButton = radioButtonList[0];
+		this.smallGraphButton.onclick = this.smallGraphCallback.bind(this);
+		this.smallGraphButton.checked = true;
+		this.controls.push(this.smallGraphButton);
+
+		this.largeGraphButton = radioButtonList[1];
+		this.largeGraphButton.onclick = this.largeGraphCallback.bind(this);
+		this.controls.push(this.largeGraphButton);
+
+		addDivisorToAlgorithmBar();
+
+		// We are explicitly not adding the buttons below to this.controls
+		// since we don't want them to be disabled
+		radioButtonList = addRadioButtonGroupToAlgorithmBar(
+			[
+				'Logical Representation',
+				'Adjacency List Representation',
+				'Adjacency Matrix Representation',
+			],
+			'GraphRepresentation',
+		);
+
+		this.logicalButton = radioButtonList[0];
+		this.logicalButton.onclick = this.graphRepChangedCallback.bind(this, 1);
+
+		this.adjacencyListButton = radioButtonList[1];
+		this.adjacencyListButton.onclick = this.graphRepChangedCallback.bind(this, 2);
+
+		this.adjacencyMatrixButton = radioButtonList[2];
+		this.adjacencyMatrixButton.onclick = this.graphRepChangedCallback.bind(this, 3);
+		this.logicalButton.checked = true;
+		
+		//save this line lol
 		this.smallGraphButton.onclick = this.smallGraphCallback.bind(this, adjMatrix);
 	}
 
@@ -193,23 +230,6 @@ export default class DFS extends Graph {
 			STACK_LABEL_Y,
 			0,
 		);
-
-		this.pseudocode = pseudocodeText.DFS;
-		if (this.physicalStack) {
-			this.codeID = this.addCodeToCanvasBaseAll(
-				this.pseudocode,
-				'iterative',
-				CODE_START_X,
-				CODE_START_Y,
-			);
-		} else {
-			this.codeID = this.addCodeToCanvasBaseAll(
-				this.pseudocode,
-				'recursive',
-				CODE_START_X,
-				CODE_START_Y,
-			);
-		}
 
 		this.animationManager.setAllLayers([0, 32, this.currentLayer]);
 		this.animationManager.startNewAnimation(this.commands);
