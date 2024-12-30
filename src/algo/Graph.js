@@ -200,6 +200,14 @@ export default class Graph extends Algorithm {
 		}
 	}
 
+	//overloaded Callback for use with CreateGraph class
+	smallGraphCallback(adj_matrix) {
+		if (this.size !== SMALL_SIZE) {
+			this.animationManager.resetAll();
+			this.setup_small(adj_matrix);
+		}
+	}
+
 	largeGraphCallback() {
 		if (this.size !== LARGE_SIZE) {
 			this.animationManager.resetAll();
