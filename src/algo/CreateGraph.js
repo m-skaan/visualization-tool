@@ -73,6 +73,7 @@ const LARGE_RECURSION_SPACING_Y = 15;
 const CODE_START_X = 1000;
 const CODE_START_Y = 50;
 
+const SMALL_SIZE = 8;
 
 let adjMatrix =
 	//A     B      C     D      E     F      G      H
@@ -91,7 +92,6 @@ export default class CreateGraph extends Graph {
 	constructor(am, w, h) {
 		super(am, w, h, BFS_DFS_ADJ_LIST);
 		this.addControls();
-		this.physicalStack = false;
 		//playground here
 		this.nextIndex = 0;
 
@@ -107,6 +107,7 @@ export default class CreateGraph extends Graph {
         this.listField.classList.add('scrollable-textbox'); // Add a CSS class for styling
         this.listField.style.width = '200px'; // Adjust width
         this.listField.style.height = '100px'; // Adjust height
+		this.listField.value = "A->B,C,D,E\nB->A,G\nC->A\nD->A,F\nE->A,G\nF->D,G\nG->B,E,F,H\nH->G";
 		
 		// Add an input event listener to restrict input
         this.listField.addEventListener('input', function(event) {
@@ -125,13 +126,13 @@ export default class CreateGraph extends Graph {
 
 		addDivisorToAlgorithmBar();
 
-		let radioButtonList = addRadioButtonGroupToAlgorithmBar(
+		/*let radioButtonList = addRadioButtonGroupToAlgorithmBar(
 			['Small Graph', 'Large Graph'],
 			'GraphSize',
 		);
 
 		this.smallGraphButton = radioButtonList[0];
-		this.smallGraphButton.onclick = this.smallGraphCallback.bind(this);
+		this.smallGraphButton.onclick = this.smallGraphCallback.bind(this, adjMatrix);
 		this.smallGraphButton.checked = true;
 		this.controls.push(this.smallGraphButton);
 
@@ -139,11 +140,11 @@ export default class CreateGraph extends Graph {
 		this.largeGraphButton.onclick = this.largeGraphCallback.bind(this);
 		this.controls.push(this.largeGraphButton);
 
-		addDivisorToAlgorithmBar();
+		addDivisorToAlgorithmBar();*/
 
 		// We are explicitly not adding the buttons below to this.controls
 		// since we don't want them to be disabled
-		radioButtonList = addRadioButtonGroupToAlgorithmBar(
+		let radioButtonList = addRadioButtonGroupToAlgorithmBar(
 			[
 				'Logical Representation',
 				'Adjacency List Representation',
@@ -161,9 +162,6 @@ export default class CreateGraph extends Graph {
 		this.adjacencyMatrixButton = radioButtonList[2];
 		this.adjacencyMatrixButton.onclick = this.graphRepChangedCallback.bind(this, 3);
 		this.logicalButton.checked = true;
-		
-		//save this line lol
-		this.smallGraphButton.onclick = this.smallGraphCallback.bind(this, adjMatrix);
 	}
 
 	startCallback() {
@@ -177,34 +175,27 @@ export default class CreateGraph extends Graph {
             });
             console.log("Parsed Adjacency List: ", adjacencyList);
             this.updateAdjMatrix(adjacencyList);
-			this.setup(adjMatrix);
+			this.smallGraphCallback(adjMatrix);
+			console.log("here");
+			//this.setup(adjMatrix);
         } else {
             this.shake(this.runButton);  // Shake button if no input
         }
     }
 
 	updateAdjMatrix(adjacencyList) {
-		// Get all nodes from the adjacency list to determine matrix size
-		const nodes = [...new Set(adjacencyList.flatMap(({ node, neighbors }) => [node, ...neighbors]))];
-		const nodeIndex = Object.fromEntries(nodes.map((node, index) => [node, index]));
-	
-		// Create a new adjacency matrix with default values (-1)
-		const size = nodes.length;
-		let adjMatrix = Array(size).fill(null).map(() => Array(size).fill(-1));
-	
-		// Populate the adjacency matrix based on the adjacency list
-		adjacencyList.forEach(({ node, neighbors }) => {
-			const nodeIdx = nodeIndex[node];
-			neighbors.forEach((neighbor) => {
-				const neighborIdx = nodeIndex[neighbor];
-				adjMatrix[nodeIdx][neighborIdx] = 1; // Add edge
-				adjMatrix[neighborIdx][nodeIdx] = 1; // Assuming undirected graph
-			});
-		});
-	
-		// Log and return the updated adjacency matrix
-		console.log("Updated Adjacency Matrix: ", adjMatrix);
-		return adjMatrix;
+		adjMatrix = adjMatrix.map(row => row.map(() => -1));
+
+    	// Update adjMatrix based on the adjacency list
+    	adjacencyList.forEach(({ node, neighbors }) => {
+        const nodeIdx = node.charCodeAt(0) - 'A'.charCodeAt(0); // Map node to its fixed index
+        neighbors.forEach(neighbor => {
+            const neighborIdx = neighbor.charCodeAt(0) - 'A'.charCodeAt(0); // Map neighbor to its fixed index
+            adjMatrix[nodeIdx][neighborIdx] = 1; // Add edge
+            adjMatrix[neighborIdx][nodeIdx] = 1; // Assuming undirected graph
+        	});
+    	});
+    	console.log("Updated Global Adjacency Matrix: ", adjMatrix);
 	}
 
 	setup(adjMatrix) {
@@ -255,5 +246,12 @@ export default class CreateGraph extends Graph {
 		}
 		this.messageID = [];
 		this.cmd(act.setText, this.infoLabelID, '');
+	}
+
+	//overloaded Callback for use with CreateGraph class
+	smallGraphCallback(adj_matrix) {
+		this.animationManager.resetAll();
+		console.log("In the parent:", adj_matrix);
+		this.setup_small(adj_matrix);
 	}
 }

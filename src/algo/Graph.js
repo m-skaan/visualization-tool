@@ -204,6 +204,7 @@ export default class Graph extends Algorithm {
 	smallGraphCallback(adj_matrix) {
 		if (this.size !== SMALL_SIZE) {
 			this.animationManager.resetAll();
+			console.log("In the parent:", adj_matrix);
 			this.setup_small(adj_matrix);
 		}
 	}
