@@ -162,6 +162,22 @@ export default class DFS extends Graph {
 		this.smallGraphButton.onclick = this.smallGraphCallback.bind(this, adjMatrix);
 	}
 
+	startCallback() {
+        if (this.listField.value !== '') {
+            console.log(this.listField.value);
+            // Parsing the adjacency list from the input
+            const adjacencyList = this.listField.value.split("\n").map((line) => {
+                let [node, neighbors] = line.split("->");
+                neighbors = neighbors ? neighbors.split(',') : [];
+                return { node: node.trim(), neighbors: neighbors.map(n => n.trim()) };
+            });
+            console.log("Parsed Adjacency List: ", adjacencyList);
+            this.setup(adjacencyList);
+        } else {
+            this.shake(this.runButton);  // Shake button if no input
+        }
+    }
+
 	setup(adjMatrix) {
 		super.setup(adjMatrix);
 		this.commands = [];
@@ -247,21 +263,6 @@ export default class DFS extends Graph {
 			this.physicalStack = physical;
 			this.animationManager.resetAll();
 			this.setup(this.adj_matrix);
-		}
-	}
-
-	startCallback() {
-		if (this.startField.value !== '') {
-			let startValue = this.startField.value;
-			this.startField.value = '';
-			startValue = startValue.toUpperCase();
-			if (this.physicalStack) {
-				this.implementAction(this.doDFSStack.bind(this), startValue);
-			} else {
-				this.implementAction(this.doDFSRecursive.bind(this), startValue);
-			}
-		} else {
-			this.shake(this.startButton);
 		}
 	}
 
