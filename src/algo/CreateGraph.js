@@ -123,39 +123,6 @@ export default class DFS extends Graph {
 		this.runButton = addControlToAlgorithmBar('Button', 'Run');
         this.runButton.onclick = this.startCallback.bind(this);
 
-
-		/*
-
-		this.startField = addControlToAlgorithmBar('Text', '');
-		this.startField.style.textAlign = 'center';
-		this.startField.onkeydown = this.returnSubmit(
-			this.startField,
-			this.startCallback.bind(this),
-			1,
-			false,
-		);
-		this.controls.push(this.startField);
-
-		this.startButton = addControlToAlgorithmBar('Button', 'Run');
-		this.startButton.onclick = this.startCallback.bind(this);
-		this.controls.push(this.startButton);*/
-
-		addDivisorToAlgorithmBar();
-
-		const radioButtonList = addRadioButtonGroupToAlgorithmBar(
-			['Recursion', 'Stack'],
-			'StackType',
-		);
-
-		this.recursiveStackButton = radioButtonList[0];
-		this.recursiveStackButton.onclick = this.stackCallback.bind(this, false);
-		this.recursiveStackButton.checked = true;
-		this.controls.push(this.recursiveStackButton);
-
-		this.physicalStackButton = radioButtonList[1];
-		this.physicalStackButton.onclick = this.stackCallback.bind(this, true);
-		this.controls.push(this.physicalStackButton);
-
 		addDivisorToAlgorithmBar();
 
 		super.addControls();
