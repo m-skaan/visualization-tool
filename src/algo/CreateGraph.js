@@ -74,7 +74,7 @@ const CODE_START_X = 1000;
 const CODE_START_Y = 50;
 
 
-const adjMatrix =
+let adjMatrix =
 	//A     B      C     D      E     F      G      H
 	/*A*/ [
 		[0, 1, 0, 1, 0, 0, 0, 0],
@@ -87,7 +87,7 @@ const adjMatrix =
 		/*H*/ [0, 0, 0, 0, 0, 0, 0, 0],
 	].map(row => row.map(x => x || -1));
 
-export default class DFS extends Graph {
+export default class CreateGraph extends Graph {
 	constructor(am, w, h) {
 		super(am, w, h, BFS_DFS_ADJ_LIST);
 		this.addControls();
@@ -176,11 +176,36 @@ export default class DFS extends Graph {
                 return { node: node.trim(), neighbors: neighbors.map(n => n.trim()) };
             });
             console.log("Parsed Adjacency List: ", adjacencyList);
-            this.setup(adjacencyList);
+            this.updateAdjMatrix(adjacencyList);
+			this.setup(adjMatrix);
         } else {
             this.shake(this.runButton);  // Shake button if no input
         }
     }
+
+	updateAdjMatrix(adjacencyList) {
+		// Get all nodes from the adjacency list to determine matrix size
+		const nodes = [...new Set(adjacencyList.flatMap(({ node, neighbors }) => [node, ...neighbors]))];
+		const nodeIndex = Object.fromEntries(nodes.map((node, index) => [node, index]));
+	
+		// Create a new adjacency matrix with default values (-1)
+		const size = nodes.length;
+		let adjMatrix = Array(size).fill(null).map(() => Array(size).fill(-1));
+	
+		// Populate the adjacency matrix based on the adjacency list
+		adjacencyList.forEach(({ node, neighbors }) => {
+			const nodeIdx = nodeIndex[node];
+			neighbors.forEach((neighbor) => {
+				const neighborIdx = nodeIndex[neighbor];
+				adjMatrix[nodeIdx][neighborIdx] = 1; // Add edge
+				adjMatrix[neighborIdx][nodeIdx] = 1; // Assuming undirected graph
+			});
+		});
+	
+		// Log and return the updated adjacency matrix
+		console.log("Updated Adjacency Matrix: ", adjMatrix);
+		return adjMatrix;
+	}
 
 	setup(adjMatrix) {
 		super.setup(adjMatrix);
@@ -196,41 +221,6 @@ export default class DFS extends Graph {
 		this.infoLabelID = this.nextIndex++;
 		this.cmd(act.createLabel, this.infoLabelID, '', INFO_MSG_X, INFO_MSG_Y, 0);
 
-		this.cmd(
-			act.createLabel,
-			this.nextIndex++,
-			'Visited Set:',
-			VISITED_START_X - 5,
-			VISITED_START_Y - 25,
-			0,
-		);
-		this.cmd(
-			act.createLabel,
-			this.nextIndex++,
-			'List:',
-			LIST_START_X - 5,
-			LIST_START_Y - 25,
-			0,
-		);
-		this.cmd(
-			act.createLabel,
-			this.nextIndex++,
-			'Current vertex:',
-			CURRENT_VERTEX_LABEL_X,
-			CURRENT_VERTEX_LABEL_Y,
-			0,
-		);
-
-		this.stackLabelID = this.nextIndex++;
-		this.cmd(
-			act.createLabel,
-			this.stackLabelID,
-			this.physicalStack ? 'Stack:' : 'Recursive stack:   Recursive calls:',
-			STACK_LABEL_X,
-			STACK_LABEL_Y,
-			0,
-		);
-
 		this.animationManager.setAllLayers([0, 32, this.currentLayer]);
 		this.animationManager.startNewAnimation(this.commands);
 		this.animationManager.skipForward();
@@ -243,14 +233,6 @@ export default class DFS extends Graph {
 		this.listID = [];
 		this.visitedID = [];
 		this.messageID = [];
-	}
-
-	stackCallback(physical) {
-		if (this.physicalStack !== physical) {
-			this.physicalStack = physical;
-			this.animationManager.resetAll();
-			this.setup(this.adj_matrix);
-		}
 	}
 
 	clear() {
