@@ -114,6 +114,8 @@ export default class DFS extends Graph {
 
 		addDivisorToAlgorithmBar();
 
+		this.startButton1 = addControlToAlgorithmBar('Button', 'Run1');
+
 		super.addControls();
 	}
 
