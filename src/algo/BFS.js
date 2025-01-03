@@ -84,6 +84,8 @@ export default class BFS extends Graph {
 
 		addDivisorToAlgorithmBar();
 
+		this.startButton1 = addControlToAlgorithmBar('Button', 'Create Graph');
+
 		super.addControls();
 	}
 
