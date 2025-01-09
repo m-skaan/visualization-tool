@@ -218,18 +218,28 @@ export default class AnimationManager extends EventListener {
 		this.skipBackButton = addControlToAnimationBar(animBarRef, 'Button', 'Skip Back', () =>
 			this.skipBack(),
 		);
-		this.stepBackButton = addControlToAnimationBar(animBarRef, 'Button', 'Step Back', () =>
-			this.stepBack(),
+		this.stepBackButton = addControlToAnimationBar(animBarRef, 'Button', 'Step Back', () => {
+				if (!this.paused) {
+					this.doPlayPause();
+				}
+				this.stepBack()
+			},
 		);
 		this.playPauseBackButton = addControlToAnimationBar(animBarRef, 'Button', 'Pause', () =>
 			this.doPlayPause(),
 		);
 		this.playPauseBackButton.setAttribute('style', 'width: 80px');
+		this.playPauseBackButton.style.backgroundColor = '#ffcccc';
 		this.stepForwardButton = addControlToAnimationBar(
 			animBarRef,
 			'Button',
 			'Step Forward',
-			() => this.step(),
+			() => {
+				if (!this.paused) {
+					this.doPlayPause();
+				}
+				this.step()
+			},
 		);
 		this.skipForwardButton = addControlToAnimationBar(
 			animBarRef,
@@ -400,7 +410,7 @@ export default class AnimationManager extends EventListener {
 		this.awaitingStep = false;
 		this.currentBlock = [];
 		this.undoBlock = [];
-		if (this.currentAnimation === this.animationSteps.length) {
+		if (!this.animationSteps || this.currentAnimation === this.animationSteps.length) {
 			this.currentlyAnimating = false;
 			this.awaitingStep = false;
 			this.fireEvent('AnimationEnded', 'NoData');
@@ -474,6 +484,9 @@ export default class AnimationManager extends EventListener {
 			this.animationPaused &&
 			this.undoAnimationStepIndices !== null
 		) {
+			if (this.undoStack == null || this.undoStack.length === 0) {
+				this.stepBackButton.disabled = true;
+			}
 			this.fireEvent('AnimationStarted', 'NoData');
 			this.currentlyAnimating = true;
 			this.undoLastBlock();
@@ -481,6 +494,9 @@ export default class AnimationManager extends EventListener {
 			// so to be safe we'll kill it and start it again.
 			this.stopTimer();
 			this.startTimer();
+		} else if (this.undoStack == null || this.undoStack.length === 0) {
+			this.stepBackButton.disabled = true;
+			this.fireEvent('AnimationUndoUnavailable', 'NoData');
 		}
 	}
 
@@ -605,8 +621,12 @@ export default class AnimationManager extends EventListener {
 		if (this.undoAnimationStepIndices.length === 0) {
 			this.awaitingStep = false;
 			this.currentlyAnimating = false;
-			this.undoAnimationStepIndices = this.undoAnimationStepIndicesStack.pop();
-			this.animationSteps = this.previousAnimationSteps.pop();
+			if (this.undoAnimationStepIndicesStack.length > 0) {
+				this.undoAnimationStepIndices = this.undoAnimationStepIndicesStack.pop();
+			}
+			if (this.previousAnimationSteps.length > 0) {
+				this.animationSteps = this.previousAnimationSteps.pop();
+			}
 			this.fireEvent('AnimationEnded', 'NoData');
 			this.fireEvent('AnimationUndo', 'NoData');
 			this.currentBlock = [];
@@ -626,7 +646,7 @@ export default class AnimationManager extends EventListener {
 	}
 
 	undoLastBlock() {
-		if (this.undoAnimationStepIndices.length === 0) {
+		if (this.undoAnimationStepIndices == null || this.undoAnimationStepIndices.length === 0) {
 			// Nothing on the undo stack.  Return
 			return;
 		}
@@ -667,7 +687,6 @@ export default class AnimationManager extends EventListener {
 	}
 
 	updateLayer(layer, isActive) {
-		// console.log(layer, isActive)
 		this.animatedObjects.updateLayer(layer, isActive);
 		this.animatedObjects.draw();
 	}
@@ -717,8 +736,9 @@ export default class AnimationManager extends EventListener {
 					}
 				} else {
 					if (
-						this.animationPaused &&
-						this.currentAnimation < this.animationSteps.length
+						this.animationPaused
+						&& this.animationSteps !== undefined
+						&& this.currentAnimation < this.animationSteps.length
 					) {
 						this.awaitingStep = true;
 						this.fireEvent('AnimationWaiting', 'NoData');
@@ -735,7 +755,9 @@ export default class AnimationManager extends EventListener {
 	animWaiting() {
 		this.stepForwardButton.disabled = false;
 		if (this.skipBackButton.disabled === false) {
-			this.stepBackButton.disabled = false;
+			if (this.undoStack && this.undoStack.length !== 0) {
+				this.stepBackButton.disabled = false;
+			}
 		}
 		this.objectManager.statusReport.setText('Animation Paused');
 		this.objectManager.statusReport.setForegroundColor('#FF0000');
@@ -743,9 +765,8 @@ export default class AnimationManager extends EventListener {
 
 	animStarted() {
 		this.skipForwardButton.disabled = false;
+		this.stepForwardButton.disabled = false;
 		this.skipBackButton.disabled = false;
-		this.stepForwardButton.disabled = true;
-		this.stepBackButton.disabled = true;
 		this.objectManager.statusReport.setText('Animation Running');
 		this.objectManager.statusReport.setForegroundColor('#009900');
 	}
@@ -754,7 +775,11 @@ export default class AnimationManager extends EventListener {
 		this.skipForwardButton.disabled = true;
 		this.stepForwardButton.disabled = true;
 		if (this.skipBackButton.disabled === false && this.paused) {
-			this.stepBackButton.disabled = false;
+			if (this.undoStack && this.undoStack.length !== 0) {
+				this.stepBackButton.disabled = false;
+			} else {
+				this.stepForwardButton.disabled = false;
+			}
 		}
 		this.objectManager.statusReport.setText('Animation Completed');
 		this.objectManager.statusReport.setForegroundColor('#000000');
@@ -762,7 +787,7 @@ export default class AnimationManager extends EventListener {
 
 	animUndoUnavailable() {
 		this.skipBackButton.disabled = true;
-		this.stepBackButton.disabled = true;
+		// this.stepBackButton.disabled = true;
 	}
 
 	timeout() {
@@ -777,11 +802,15 @@ export default class AnimationManager extends EventListener {
 		this.paused = !this.paused;
 		if (this.paused) {
 			this.playPauseBackButton.setAttribute('value', 'Play');
+			this.playPauseBackButton.style.backgroundColor = '#ccffcc';
 			if (this.skipBackButton.disabled === false) {
-				this.stepBackButton.disabled = false;
+				if (this.undoStack && this.undoStack.length !== 0) {
+					this.stepBackButton.disabled = false;
+				}
 			}
 		} else {
 			this.playPauseBackButton.setAttribute('value', 'Pause');
+			this.playPauseBackButton.style.backgroundColor = '#ffcccc';
 		}
 		this.setPaused(this.paused);
 	}
