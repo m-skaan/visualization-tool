@@ -397,5 +397,32 @@ export default class BFS extends Graph {
 
 		// Append modal to the document body
 		document.body.appendChild(modal);
+
+		document.addEventListener('DOMContentLoaded', () => {
+			if (iframe) {
+				iframe.addEventListener('load', () => {
+					try {
+						const iframeDocument = iframe.contentWindow.document;
+						const runButton = iframeDocument.querySelector('input[type="Button"][value="Run"]');
+						if (runButton) {
+							runButton.addEventListener('click', (event) => {
+								event.preventDefault(); // Prevent default behavior (if any)
+								//const modal = document.querySelector('#modal'); // Replace with your modal's selector
+								if (modal) {
+									modal.style.display = 'none'; // Hide the modal
+								}
+								console.log('Run button clicked. Modal closed.');
+							});
+						} else {
+							console.warn('Run button not found in iframe.');
+						}
+					} catch (error) {
+						console.error('Error accessing iframe content:', error);
+					}
+				});
+			} else {
+				console.error('Iframe not found.');
+			}
+		});
 	}
 }

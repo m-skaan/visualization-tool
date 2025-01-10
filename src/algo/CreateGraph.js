@@ -137,7 +137,6 @@ export default class CreateGraph extends Graph {
 			});
 			this.updateAdjMatrix(adjacencyList);
 			this.smallGraphCallback(adjMatrix);
-			//this.setup(adjMatrix);
 		} else {
 			this.shake(this.runButton); // Shake button if no input
 		}
@@ -154,6 +153,7 @@ export default class CreateGraph extends Graph {
 				adjMatrix[nodeIdx][neighborIdx] = 1; // Add edge
 				adjMatrix[neighborIdx][nodeIdx] = 1; // Assuming undirected graph
 			});
+			adjMatrix[nodeIdx][nodeIdx] = 1; // add self loop to enable disconnected graphs
 		});
 	}
 
