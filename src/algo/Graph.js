@@ -402,17 +402,21 @@ export default class Graph extends Algorithm {
 		this.commands = [];
 		this.circleID = new Array(this.size);
 		for (let i = 0; i < this.size; i++) {
-			this.circleID[i] = this.nextIndex++;
-			this.cmd(
-				act.createCircle,
-				this.circleID[i],
-				this.toStr(i),
-				this.x_pos_logical[i],
-				this.y_pos_logical[i],
-			);
-			this.cmd(act.setTextColor, this.circleID[i], VERTEX_INDEX_COLOR, 0);
-
-			this.cmd(act.setLayer, this.circleID[i], 1);
+			if (adj_matrix && adj_matrix[i].some(value => value !== -1)) {
+				// Only create a circle if the row has non-zero values
+				this.circleID[i] = this.nextIndex++;
+				this.cmd(
+					act.createCircle,
+					this.circleID[i],
+					this.toStr(i),
+					this.x_pos_logical[i],
+					this.y_pos_logical[i],
+				);
+				this.cmd(act.setTextColor, this.circleID[i], VERTEX_INDEX_COLOR, 0);
+				this.cmd(act.setLayer, this.circleID[i], 1);
+			} else {
+				this.circleID[i] = null; // No circle for this node
+			}
 		}
 
 		if (adj_matrix) {

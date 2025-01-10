@@ -126,7 +126,7 @@ export default class LSDRadix extends Algorithm {
 	}
 
 	setURLData(searchParams) {
-		const data = searchParams.get("data");
+		const data = searchParams.get('data');
 		this.listField.value = data;
 		this.sortCallback();
 	}

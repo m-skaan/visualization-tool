@@ -84,6 +84,10 @@ export default class BFS extends Graph {
 
 		addDivisorToAlgorithmBar();
 
+		this.startButton1 = addControlToAlgorithmBar('Button', 'Create Graph');
+		this.startButton1.onclick = this.openCreateGraphModal.bind(this);
+		this.controls.push(this.startButton1);
+
 		super.addControls();
 	}
 
@@ -346,4 +350,79 @@ export default class BFS extends Graph {
 		}
 		this.messageID = [];
 	}
+
+	// Add this new method in the class
+	/*openCreateGraphModal() {
+		// Create modal container
+		const modal = document.createElement('div');
+		modal.style.position = 'fixed';
+		modal.style.top = '50%';
+		modal.style.left = '50%';
+		modal.style.transform = 'translate(-50%, -50%)';
+		modal.style.zIndex = '1000';
+		modal.style.width = '80%';
+		modal.style.height = '80%';
+		modal.style.backgroundColor = '#fff';
+		modal.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.1)';
+		modal.style.padding = '20px';
+		modal.style.overflow = 'hidden';
+	
+		// Create iframe for the webpage
+		const iframe = document.createElement('iframe');
+		iframe.src = '../CreateGraph'; // Path to CreateGraph page
+		iframe.style.width = '100%';
+		iframe.style.height = '90%';
+		iframe.style.border = 'none';
+
+		// Add iframe to modal
+		modal.appendChild(iframe);
+
+		// Create a close button
+		const closeButton = document.createElement('button');
+		closeButton.innerText = 'Close';
+		closeButton.style.position = 'absolute';
+		closeButton.style.top = '10px';
+		closeButton.style.right = '10px';
+		closeButton.style.backgroundColor = '#f44336';
+		closeButton.style.color = '#fff';
+		closeButton.style.border = 'none';
+		closeButton.style.padding = '10px';
+		closeButton.style.cursor = 'pointer';
+		closeButton.onclick = () => {
+			document.body.removeChild(modal);
+		};
+	
+		// Add close button to modal
+		modal.appendChild(closeButton);
+
+		// Append modal to the document body
+		document.body.appendChild(modal);
+
+		document.addEventListener('DOMContentLoaded', () => {
+			if (iframe) {
+				iframe.addEventListener('load', () => {
+					try {
+						const iframeDocument = iframe.contentWindow.document;
+						const runButton = iframeDocument.querySelector('input[type="Button"][value="Run"]');
+						if (runButton) {
+							runButton.addEventListener('click', (event) => {
+								event.preventDefault(); // Prevent default behavior (if any)
+								//const modal = document.querySelector('#modal'); // Replace with your modal's selector
+								if (modal) {
+									modal.style.display = 'none'; // Hide the modal
+								}
+								console.log('Run button clicked. Modal closed.');
+							});
+						} else {
+							console.warn('Run button not found in iframe.');
+						}
+					} catch (error) {
+						console.error('Error accessing iframe content:', error);
+					}
+				});
+			} else {
+				console.error('Iframe not found.');
+			}
+		});
+	}*/
 }

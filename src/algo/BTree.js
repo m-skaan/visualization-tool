@@ -217,7 +217,7 @@ export default class BTree extends Algorithm {
 	}
 
 	setURLData(searchParams) {
-		const data = searchParams.get("data");
+		const data = searchParams.get('data');
 		this.buildTreeField.value = data;
 		this.buildTreeCallback();
 	}

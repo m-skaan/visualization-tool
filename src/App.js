@@ -37,18 +37,12 @@ const App = () => {
 	return (
 		<Router basename={process.env.PUBLIC_URL + '/'}>
 			<Routes>
-				<Route
-					path="/"
-					element={<HomeScreen theme={theme} toggleTheme={toggleTheme} />}
-				/>
+				<Route path="/" element={<HomeScreen theme={theme} toggleTheme={toggleTheme} />} />
 				<Route
 					path="/about"
 					element={<AboutScreen theme={theme} toggleTheme={toggleTheme} />}
 				/>
-				<Route
-					path="*"
-					element={<AlgoScreen theme={theme} toggleTheme={toggleTheme} />}
-				/>
+				<Route path="*" element={<AlgoScreen theme={theme} toggleTheme={toggleTheme} />} />
 			</Routes>
 		</Router>
 	);

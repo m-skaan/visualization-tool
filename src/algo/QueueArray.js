@@ -131,7 +131,10 @@ export default class QueueArray extends Algorithm {
 
 	setURLData(searchParams) {
 		this.implementAction(this.clearAll.bind(this));
-		const dataList = searchParams.get("data").split(",").filter(item => item.trim() !== "");
+		const dataList = searchParams
+			.get('data')
+			.split(',')
+			.filter(item => item.trim() !== '');
 		dataList.forEach(dataEntry => {
 			this.enqueueField.value = dataEntry.substring(0, 4);
 			this.enqueueCallback();
