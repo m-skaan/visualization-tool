@@ -352,7 +352,7 @@ export default class BFS extends Graph {
 	}
 
 	// Add this new method in the class
-	openCreateGraphModal() {
+	/*openCreateGraphModal() {
 		// Create modal container
 		const modal = document.createElement('div');
 		modal.style.position = 'fixed';
@@ -424,5 +424,5 @@ export default class BFS extends Graph {
 				console.error('Iframe not found.');
 			}
 		});
-	}
+	}*/
 }

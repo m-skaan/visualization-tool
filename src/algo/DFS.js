@@ -545,7 +545,7 @@ export default class DFS extends Graph {
 	}
 
 	// Add this new method in the class
-	openCreateGraphModal() {
+	/*openCreateGraphModal() {
 		// Create modal container
 		const modal = document.createElement('div');
 		modal.style.position = 'fixed';
@@ -590,5 +590,5 @@ export default class DFS extends Graph {
 
 		// Append modal to the document body
 		document.body.appendChild(modal);
-	}
+	}*/
 }
