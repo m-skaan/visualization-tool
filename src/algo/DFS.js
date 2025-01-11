@@ -583,7 +583,6 @@ export default class DFS extends Graph {
 		iframe.style.width = '100%';
 		iframe.style.height = '90%';
 		iframe.style.border = 'none';
-	
 		// Add iframe to modal
 		modal.appendChild(iframe);
 	
@@ -615,8 +614,18 @@ export default class DFS extends Graph {
 		submitButton.style.padding = '10px';
 		submitButton.style.cursor = 'pointer';
 		submitButton.onclick = () => {
-			console.log('Submit button clicked');
-			// Add your submit logic here
+
+        	// Access the textarea inside the iframe
+        	const iframeDocument = iframe.contentWindow.document;
+        	const textBox = iframeDocument.querySelector('.scrollable-textbox');
+
+        	if (textBox) {
+            	const data = textBox.value;
+				this.handleCreateGraph(data);
+        	}
+        	// Close modal after submit
+        	document.body.removeChild(modal);
+        	document.body.removeChild(backdrop);		
 		};
 	
 		// Add buttons to modal
@@ -626,5 +635,9 @@ export default class DFS extends Graph {
 		// Append backdrop and modal to the document body
 		document.body.appendChild(backdrop);
 		document.body.appendChild(modal);
+	}
+
+	handleCreateGraph(textData) {
+		console.log(textData);
 	}
 }
