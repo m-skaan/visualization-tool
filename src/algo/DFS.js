@@ -545,7 +545,7 @@ export default class DFS extends Graph {
 	}
 
 	// Add this new method in the class
-	/*openCreateGraphModal() {
+	openCreateGraphModal() {
 		// Create modal container
 		const modal = document.createElement('div');
 		modal.style.position = 'fixed';
@@ -559,17 +559,35 @@ export default class DFS extends Graph {
 		modal.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.1)';
 		modal.style.padding = '20px';
 		modal.style.overflow = 'hidden';
-
+	
+		// Create backdrop
+		const backdrop = document.createElement('div');
+		backdrop.style.position = 'fixed';
+		backdrop.style.top = '0';
+		backdrop.style.left = '0';
+		backdrop.style.width = '100vw';
+		backdrop.style.height = '100vh';
+		backdrop.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+		backdrop.style.zIndex = '999';
+	
+		// Close modal on clicking outside the modal area
+		backdrop.onclick = (e) => {
+			if (e.target === backdrop) {
+				document.body.removeChild(modal);
+				document.body.removeChild(backdrop);
+			}
+		};
+	
 		// Create iframe for the webpage
 		const iframe = document.createElement('iframe');
 		iframe.src = '../CreateGraph'; // Path to CreateGraph page
 		iframe.style.width = '100%';
 		iframe.style.height = '90%';
 		iframe.style.border = 'none';
-
+	
 		// Add iframe to modal
 		modal.appendChild(iframe);
-
+	
 		// Create a close button
 		const closeButton = document.createElement('button');
 		closeButton.innerText = 'Close';
@@ -583,12 +601,31 @@ export default class DFS extends Graph {
 		closeButton.style.cursor = 'pointer';
 		closeButton.onclick = () => {
 			document.body.removeChild(modal);
+			document.body.removeChild(backdrop);
 		};
-
-		// Add close button to modal
+	
+		// Create a submit button
+		const submitButton = document.createElement('button');
+		submitButton.innerText = 'Submit';
+		submitButton.style.position = 'absolute';
+		submitButton.style.top = '10px';
+		submitButton.style.right = '80px';
+		submitButton.style.backgroundColor = '#4CAF50';
+		submitButton.style.color = '#fff';
+		submitButton.style.border = 'none';
+		submitButton.style.padding = '10px';
+		submitButton.style.cursor = 'pointer';
+		submitButton.onclick = () => {
+			console.log('Submit button clicked');
+			// Add your submit logic here
+		};
+	
+		// Add buttons to modal
+		modal.appendChild(submitButton);
 		modal.appendChild(closeButton);
-
-		// Append modal to the document body
+	
+		// Append backdrop and modal to the document body
+		document.body.appendChild(backdrop);
 		document.body.appendChild(modal);
-	}*/
+	}	
 }
