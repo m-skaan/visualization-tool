@@ -626,5 +626,5 @@ export default class DFS extends Graph {
 		// Append backdrop and modal to the document body
 		document.body.appendChild(backdrop);
 		document.body.appendChild(modal);
-	}	
+	}
 }
