@@ -31,7 +31,6 @@ import {
 	addRadioButtonGroupToAlgorithmBar,
 } from './Algorithm.js';
 import { BFS_DFS_ADJ_LIST } from './util/GraphValues';
-import CreateGraph from './CreateGraph';
 import Graph from './Graph.js';
 import { act } from '../anim/AnimationMain';
 import pseudocodeText from '../pseudocode.json';
