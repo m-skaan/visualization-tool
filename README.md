@@ -50,6 +50,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/andriawang6"><img src="https://avatars.githubusercontent.com/u/143114866?v=4" width="100px;" alt=""/><br /><sub><b>Andria Wang</b></sub></a><br /> <a href="https://github.com/csvistool/visualization-tool/commits?author=andriawang6" title="Code">💻</a> <a href="https://github.com/csvistool/visualization-tool/issues?q=author%3Aandriawang6" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/lyangji1011"><img src="https://avatars.githubusercontent.com/u/70451868?v=4" width="100px;" alt=""/><br /><sub><b>Lauren Ji</b></sub></a><br /> <a href="https://github.com/csvistool/visualization-tool/commits?author=lyangji1011" title="Code">💻</a> <a href="https://github.com/csvistool/visualization-tool/issues?q=author%3Alyangji1011" title="Bug reports">🐛</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/m-skaan"><img src="https://avatars.githubusercontent.com/u/93020882?s=400&u=506f3ca31537e71383d86835b9a2e28115743197&v=4" width="100px;" alt=""/><br /><sub><b>Muskaan Gupta</b></sub></a><br /><a href="https://github.com/csvistool/visualization-tool/pulls?q=author%3Am-skaan" </a> <a href="https://github.com/csvistool/visualization-tool/commits?author=m-skaan" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
