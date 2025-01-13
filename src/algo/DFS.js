@@ -674,6 +674,7 @@ export default class DFS extends Graph {
 		
 		console.log(adjMatrix);
 		this.animationManager.resetAll();
+		this.size = this.SMALL_SIZE;
 		this.setup_small(adjMatrix);
 	}
 }
