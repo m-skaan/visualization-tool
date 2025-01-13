@@ -426,6 +426,7 @@ export default class Graph extends Algorithm {
 				this.adj_matrixID[i] = new Array(this.size);
 				for (let j = 0; j < this.size; j++) {
 					this.adj_matrixID[i][j] = this.nextIndex++;
+					console.log(`Rendering node ${this.toStr(i)}:`, adj_matrix[i]);
 				}
 			}
 			this.buildEdges();

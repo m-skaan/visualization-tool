@@ -72,6 +72,19 @@ const LARGE_RECURSION_SPACING_Y = 15;
 const CODE_START_X = 1000;
 const CODE_START_Y = 50;
 
+let adjMatrix =
+	//A     B      C     D      E     F      G      H
+	/*A*/ [
+		[0, 1, 0, 1, 0, 0, 0, 0],
+		/*B*/ [1, 0, 0, 0, 0, 0, 0, 0],
+		/*C*/ [0, 0, 0, 0, 0, 0, 0, 0],
+		/*D*/ [1, 0, 0, 0, 0, 0, 0, 0],
+		/*E*/ [0, 0, 0, 0, 0, 0, 0, 0],
+		/*F*/ [0, 0, 0, 0, 0, 0, 0, 0],
+		/*G*/ [0, 0, 0, 0, 0, 0, 0, 0],
+		/*H*/ [0, 0, 0, 0, 0, 0, 0, 0],
+	].map(row => row.map(x => x || -1));
+
 export default class DFS extends Graph {
 	constructor(am, w, h) {
 		super(am, w, h, BFS_DFS_ADJ_LIST);
@@ -639,5 +652,28 @@ export default class DFS extends Graph {
 
 	handleCreateGraph(textData) {
 		console.log(textData);
+		// basically copying logic of startCallback in CreateGraph
+		const adjacencyList = textData.split('\n').map(line => {
+			let [node, neighbors] = line.split('->');
+			node = node.trim();
+			neighbors = neighbors ? neighbors.split(',') : [];
+			return { node: node.trim(), neighbors: neighbors.map(n => n.trim()) };
+		});
+		adjMatrix = adjMatrix.map(row => row.map(() => -1));
+
+		// Update adjMatrix based on the adjacency list
+		adjacencyList.forEach(({ node, neighbors }) => {
+			const nodeIdx = node.charCodeAt(0) - 'A'.charCodeAt(0); // Map node to its fixed index
+			neighbors.forEach(neighbor => {
+				const neighborIdx = neighbor.charCodeAt(0) - 'A'.charCodeAt(0); // Map neighbor to its fixed index
+				adjMatrix[nodeIdx][neighborIdx] = 1; // Add edge
+				adjMatrix[neighborIdx][nodeIdx] = 1; // Assuming undirected graph
+			});
+			adjMatrix[nodeIdx][nodeIdx] = 1; // add self loop to enable disconnected graphs
+		});
+		
+		console.log(adjMatrix);
+		this.animationManager.resetAll();
+		this.setup_small(adjMatrix);
 	}
 }
