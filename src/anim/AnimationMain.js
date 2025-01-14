@@ -869,6 +869,7 @@ export const act = {
 		params[5] = params[5] === undefined ? '' : params[5];
 		params[6] = params[6] || 0;
 		params[7] = params[7] === undefined ? 1 : params[7];
+		console.log(params);
 		this.animatedObjects.connectEdge(
 			params[0],
 			params[1],

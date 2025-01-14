@@ -415,7 +415,7 @@ export default class Graph extends Algorithm {
 				this.cmd(act.setTextColor, this.circleID[i], VERTEX_INDEX_COLOR, 0);
 				this.cmd(act.setLayer, this.circleID[i], 1);
 			} else {
-				this.circleID[i] = null; // No circle for this node
+				this.circleID[i] = -1; // No circle for this node
 			}
 		}
 
@@ -526,7 +526,7 @@ export default class Graph extends Algorithm {
 		// Create Adj Matrix
 
 		this.buildAdjMatrix();
-
+		console.log("hi", this.commands);
 		this.animationManager.setAllLayers([0, 32, this.currentLayer]);
 		this.animationManager.startNewAnimation(this.commands);
 		this.animationManager.skipForward();

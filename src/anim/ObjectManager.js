@@ -521,30 +521,32 @@ export default class ObjectManager {
 	}
 
 	connectEdge(objectIDfrom, objectIDto, color, curve, directed, lab, connectionPoint, thickness) {
-		const fromObj = this.nodes[objectIDfrom];
-		const toObj = this.nodes[objectIDto];
-		if (fromObj == null || toObj == null) {
-			throw new Error("Tried to connect two nodes, one didn't exist!");
+		if (objectIDfrom !== -1 && objectIDto !== -1) {
+			const fromObj = this.nodes[objectIDfrom];
+			const toObj = this.nodes[objectIDto];
+			if (fromObj == null || toObj == null) {
+				throw new Error("Tried to connect two nodes, one didn't exist!");
+			}
+			const l = new AnimatedLine(
+				fromObj,
+				toObj,
+				color,
+				curve,
+				directed,
+				lab,
+				connectionPoint,
+				thickness,
+			);
+			if (this.edges[objectIDfrom] == null) {
+				this.edges[objectIDfrom] = [];
+			}
+			if (this.backEdges[objectIDto] == null) {
+				this.backEdges[objectIDto] = [];
+			}
+			l.addedToScene = fromObj.addedToScene && toObj.addedToScene;
+			this.edges[objectIDfrom].push(l);
+			this.backEdges[objectIDto].push(l);
 		}
-		const l = new AnimatedLine(
-			fromObj,
-			toObj,
-			color,
-			curve,
-			directed,
-			lab,
-			connectionPoint,
-			thickness,
-		);
-		if (this.edges[objectIDfrom] == null) {
-			this.edges[objectIDfrom] = [];
-		}
-		if (this.backEdges[objectIDto] == null) {
-			this.backEdges[objectIDto] = [];
-		}
-		l.addedToScene = fromObj.addedToScene && toObj.addedToScene;
-		this.edges[objectIDfrom].push(l);
-		this.backEdges[objectIDto].push(l);
 	}
 
 	setNull(objectID, nullVal) {
